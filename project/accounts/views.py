@@ -5,3 +5,6 @@ from django.http import HttpResponse
 def test(request):
     return HttpResponse('worked')
 
+def register(request):
+    return HttpResponse('register')
+
