@@ -3,8 +3,8 @@ from django.http import HttpResponse
 
 # Create your views here.
 def test(request):
-    return HttpResponse('worked')
+    return HttpResponse('worked aweeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
 
 def register(request):
-     return HttpResponse('register')
+     return HttpResponse('register page')
 
