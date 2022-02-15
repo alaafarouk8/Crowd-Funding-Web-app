@@ -23,15 +23,9 @@ from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-<<<<<<< HEAD
     path('', include('users.urls')),
-    # path('project', include('fundproject.urls')),
     url('^', include('django.contrib.auth.urls')),
-
-=======
-    path('accounts', include('accounts.urls')),
     path('project', include('fundproject.urls')),
->>>>>>> d90889533deb00fc1bcebcc338964673440317a7
 ]
 # if settings.DEBUG:
 #         urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
