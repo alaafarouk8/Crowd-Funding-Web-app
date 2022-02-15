@@ -1,0 +1,23 @@
+{% extends "users/base.html" %}
+{% block title %}Register{% endblock %}
+{% load bootstrap4 %}
+{% block content %}
+
+<div class="container" style="margin-top: 30px;">
+    <form method="post" enctype="multipart/form-data">
+        {%csrf_token%}
+        {% bootstrap_form form %}
+        {% buttons %}
+        <button type="submit" class="btn btn-primary">
+            Sign Up
+        </button>
+        {% endbuttons %}
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Already Have An Account? <a class="ml-2" href="{% url 'users:login' %}"> Sign In</a>
+            </small>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}
