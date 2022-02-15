@@ -1,0 +1,21 @@
+{% extends "users/base.html" %}
+{% block title %}Account Activation{% endblock %}
+{% block content %}
+
+<div class="container" style="margin-top: 30px;">
+    {%if active_code == 1%}
+    <h3>Thank you for your email confirmation. Now you can login your account.</h3>
+    {%elif active_code == 0 %}
+    <h3>Activation link is valid for 24 hours only a new link has been sent to your email...</h3>
+    {%elif active_code == -1 %}
+    <h3>Please confirm your email address to complete the registration</h3>
+    {%else %}
+    <h3>Activation link is invalid!</h3>
+    {%endif%}
+</div>
+
+
+
+
+
+{% endblock content %}

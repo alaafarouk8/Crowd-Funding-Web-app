@@ -1,0 +1,4 @@
+{% autoescape off %}
+Hi {{ user.first_name }} {{ user.last_name }},
+Please click on the link to delete your account,http://{{ domain }}{% url 'users:account_delete' uidb64=uid time=time %}
+{% endautoescape %}
