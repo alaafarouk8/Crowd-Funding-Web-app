@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import os.path
 from pathlib import Path
 import os
 
@@ -41,7 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
     'bootstrap4',
+=======
+    'accounts.apps.AccountsConfig',
+    'fundproject.apps.FundprojectConfig',
+>>>>>>> d90889533deb00fc1bcebcc338964673440317a7
 ]
 
 MIDDLEWARE = [
@@ -59,7 +64,11 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+<<<<<<< HEAD
         'DIRS': ['projects.templates', ],
+=======
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+>>>>>>> d90889533deb00fc1bcebcc338964673440317a7
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,8 +86,24 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     'default': {
+<<<<<<< HEAD
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': str(BASE_DIR / "db.sqlite3"),
+=======
+
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+
+        'NAME': 'fund',
+
+        'USER': 'funduser',
+
+        'PASSWORD': '123',
+
+        'HOST': 'localhost',
+
+        'PORT': '',
+
+>>>>>>> d90889533deb00fc1bcebcc338964673440317a7
     }
 }
 # DATABASES = {
@@ -145,6 +170,7 @@ STATICFILES_DIRS = [
 MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 
+<<<<<<< HEAD
 # Email_activation
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -156,3 +182,14 @@ EMAIL_HOST_USER = 'asmaatestproject@gmail.com'
 EMAIL_HOST_PASSWORD = 'test12345@#'
 
 
+=======
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+# Default primary key field type
+# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+>>>>>>> d90889533deb00fc1bcebcc338964673440317a7
