@@ -116,6 +116,10 @@ def user_login(request):
 
 @login_required(login_url='/login')
 def index(request):
-    return render(request, "users/index.html")
-# #
+    context ={
+        "user" : request.username
+    }
+    return render(request, "users/index.html" , context)
+# # #####
+
 
