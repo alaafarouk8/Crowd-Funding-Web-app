@@ -1,0 +1,15 @@
+.profile-image{
+   height: 200px;
+   width: 20%;
+}
+.username{
+    font-weight: bold;
+    color: green;
+    font-size:3vw;
+}
+.username::first-letter {
+ text-transform: uppercase;
+ }
+.data{
+ font-weight: bold;
+}

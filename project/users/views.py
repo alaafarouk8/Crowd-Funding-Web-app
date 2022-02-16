@@ -122,4 +122,18 @@ def index(request):
     return render(request, "users/index.html" , context)
 # # #####
 
+@login_required(login_url='/login')
+def userprofile(request):
+    if not request.user.is_authenticated:
+        return redirect(reverse("users:login"))
+    return render(request, "users/userprofile.html")
+
+@login_required(login_url='/login')
+def deleteprofile(request , id):
+    queryset = Users.objects.get(id=id)
+    if request.method == 'POST':
+        queryset.delete()
+        logout(request)
+    return render(request , "users/deleteprofile.html")
+
 
