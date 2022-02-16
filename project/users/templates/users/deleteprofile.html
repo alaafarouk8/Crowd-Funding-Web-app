@@ -1,0 +1,17 @@
+{%extends 'users/index.html'%}
+{% load static%}
+{% block title %} Confirmation {% endblock %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/deleteconfirm.css' %}"/>
+{% endblock %}
+{% block content%}
+<form method="post" action="" >
+   {% csrf_token %}
+    <div class="container">
+        <h1>Delete Account</h1> <br>
+     <p>Are you sure you want to delete?</p><br>
+     <input class="btn btn-danger" type="submit" value="Yes" />
+     <a href="{%url 'users:userprofile' %}"><div class="btn btn-primary">Cancel</div></a>
+    </div>
+</form>
+{% endblock%}
