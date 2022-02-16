@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>
         {%block Title%}
-          Crowd Funding 
+          Crowd Funding
         {% endblock %}
     </title>
     {%load static%}
@@ -22,17 +22,32 @@
 
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    {% block head-css %}
+    <link rel="stylesheet" type="text/css" href="{% static '' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '' %}">
+    {% endblock %}
+
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Crowd Funding </a>
-    
+
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                {%if request.session.username%}
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                  <a class="nav-link " href="">Logout</a>
               </li>
+              {%else%}
+              <li class="nav-item">
+                  <a class="nav-link" href="">Register</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="">Log In</a>
+              </li>
+              {%endif%}
+                <div class="d-flex justify-content-center" style="padding-left:300px">
               <li class="nav-item">
                 <a class="nav-link" href="#">Create Project</a>
               </li>
@@ -47,30 +62,13 @@
                   <li><a class="dropdown-item" href="#">Something else here</a></li>
                 </ul>
               </li>
-              {%if request.session.username%}
-              <li class="nav-item">
-                  <a class="nav-link " href="">Logout</a>
-              </li>
-              {%else%}
-              <li class="nav-item">
-                  <a class="nav-link" href="">Register</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="">Log In</a>
-              </li>
-              {%endif%}
-              <li class="nav-item">
-                  <a class="nav-link" href="">About </a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="">Contact</a>
-              </li>
-        
+                    </div>
             </ul>
+
             <form class="d-flex">
                 {% csrf_token %}
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
+              <button class="btn btn-success" type="submit" style="color:#">Search</button>
             </form>
           </div>
         </div>
