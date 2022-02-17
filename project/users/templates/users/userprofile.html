@@ -19,8 +19,10 @@
         <p class="card-text">
             <br/>
             <br/>
-            <a href="{% url 'users:deleteprofile' user.id %}" class="btn btn-outline-danger  active" role="button" aria-pressed="true">Delete Account</a>
-            <a href="#" class="btn btn-outline-success  active" role="button" aria-pressed="true">Edit Account</a>
+            <a href="{% url 'users:deleteprofile' user.id %}" class="btn btn-outline-danger  active" role="button"
+               aria-pressed="true">Delete Account</a>
+            <a href="{%url 'users:editprofile' %}" class="btn btn-outline-success  active" role="button"
+               aria-pressed="true">Edit Account</a>
         </p>
     </div>
 </div>
