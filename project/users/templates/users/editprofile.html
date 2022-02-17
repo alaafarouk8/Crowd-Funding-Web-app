@@ -1,0 +1,22 @@
+{%extends 'users/index.html'%}
+{% block title %} Edit {% endblock %}
+{% load bootstrap4 %}
+{% block content %}
+
+<form method="post">
+    <br/>
+    <br/>
+    {%csrf_token%}
+    {% bootstrap_form form %}
+<!--    {{ form }}-->
+<!--    <div class="form-row">-->
+<!--        <div class="col-md-5">-->
+<!--            -->
+<!--        </div>-->
+<!--    </div>-->
+    <button type="submit" class="btn btn-primary">
+        Update
+    </button>
+</form>
+
+{% endblock %}

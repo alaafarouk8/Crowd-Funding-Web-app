@@ -24,7 +24,7 @@ from django.conf.urls import url
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('users.urls')),
-    # path('project', include('fundproject.urls')),
+    path('project', include('fundproject.urls')),
     url('^', include('django.contrib.auth.urls')),
 
 ]

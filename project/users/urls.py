@@ -8,7 +8,7 @@ from django.conf.urls.static import static
 from users import views
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import PasswordResetConfirmView
-
+from .views import userprofile
 app_name = 'users'
 
 urlpatterns = [
@@ -17,6 +17,10 @@ urlpatterns = [
     path('activate/<uidb64>/<time>',views.activate, name='activate'),
     path('login/', views.user_login , name='login'),
     path('logout/',views.logout_view,name='logout'),
+    path('userprofile', views.userprofile  , name="userprofile"),
+    path('deleteprofile/<int:id>/' , views.deleteprofile , name="deleteprofile"),
+    path('editprofile' , views.editprofile , name="editprofile"),
+    # path('logout/',views.logout_view,name='logout'),
     #  path('profile',views.user_profile,name="profile"),
 
     # Password reset links (ref: https://github.com/django/django/blob/master/django/contrib/auth/views.py)
