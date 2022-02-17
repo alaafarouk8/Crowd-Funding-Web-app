@@ -1,4 +1,3 @@
-
 from users.forms import RegistraionForm, LoginForm, UpdateUserForm
 from django.shortcuts import render, redirect, reverse
 from django.contrib.sites.shortcuts import get_current_site
@@ -12,6 +11,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+
 
 # Create your views here.
 def register(request):
@@ -36,6 +36,7 @@ def register(request):
         form = RegistraionForm()
     return render(request, 'users/new-register.html', {'form': form})
 
+
 def send_email(user, current_site, email, email_body, email_subject):
     mail_subject = email_subject
     message = render_to_string(
@@ -51,6 +52,7 @@ def send_email(user, current_site, email, email_body, email_subject):
     email = EmailMessage(mail_subject, message, to=[to_email])
     email.send()
 
+
 def activate(request, uidb64, time):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
@@ -64,10 +66,10 @@ def activate(request, uidb64, time):
         if user.is_active == False:
             email_sent_at = time_sent
             date_diffrince = (
-                datetime.datetime.now()
-                - datetime.datetime.strptime(email_sent_at,
-                                             "%Y-%m-%d %H:%M:%S.%f")
-            ).seconds / 60
+                                     datetime.datetime.now()
+                                     - datetime.datetime.strptime(email_sent_at,
+                                                                  "%Y-%m-%d %H:%M:%S.%f")
+                             ).seconds / 60
 
             if date_diffrince < (24 * 60):
                 user.is_active = True
@@ -103,23 +105,26 @@ def user_login(request):
         if form.is_valid():
             email = request.POST.get('email')
             password = request.POST.get('password')
-            user = authenticate(email=Users.objects.get(email=email) ,password=password)
+            user = authenticate(email=Users.objects.get(email=email), password=password)
             if user is not None:
                 if user.is_active:
-                    login(request,user)
+                    login(request, user)
                     return render(request, "users/index.html")
             # else:
             #     messages.info(request,'invalid login data...')
     else:
         form = LoginForm()
-    return render(request, 'users/new-login.html', {'form' : form})
+    return render(request, 'users/new-login.html', {'form': form})
+
 
 @login_required(login_url='/login')
 def index(request):
-    context ={
-        "user" : request.username
+    context = {
+        "user": request.username
     }
-    return render(request, "users/index.html" , context)
+    return render(request, "users/index.html", context)
+
+
 # # #####
 
 @login_required(login_url='/login')
@@ -128,12 +133,36 @@ def userprofile(request):
         return redirect(reverse("users:login"))
     return render(request, "users/userprofile.html")
 
+
 @login_required(login_url='/login')
-def deleteprofile(request , id):
+def deleteprofile(request, id):
     queryset = Users.objects.get(id=id)
     if request.method == 'POST':
         queryset.delete()
         logout(request)
-    return render(request , "users/deleteprofile.html")
+    return render(request, "users/deleteprofile.html")
 
 
+@login_required(login_url='/login')
+def editprofile(request):
+    form = UpdateUserForm(request.POST, request.FILES, instance=request.user)
+    if request.method == 'POST':
+        if form.is_valid():
+            print("photo from form is :", form.cleaned_data["photo"])
+            request.user.photo = form.cleaned_data["photo"]
+            form.save()
+            return redirect(reverse("users:userprofile"))
+        else:
+            form = UpdateUserForm(
+                initial={
+                    "first_name": request.user.first_name,
+                    "last_name": request.user.last_name,
+                    "phone": request.user.phone,
+                    "date_birth": request.user.date_birth,
+                    "facebook_link": request.user.facebook_link,
+                    "country": request.user.country,
+
+                }
+            )
+        #context={"form": form}
+    return render(request , "users/editprofile.html" , {"form": form} )
