@@ -126,12 +126,17 @@ def index(request):
 
 
 # # #####
+def logout_view(request):
+    logout(request)
+    return redirect('/login')
 
 @login_required(login_url='/login')
 def userprofile(request):
     if not request.user.is_authenticated:
         return redirect(reverse("users:login"))
     return render(request, "users/userprofile.html")
+
+
 
 
 @login_required(login_url='/login')
