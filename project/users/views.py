@@ -1,4 +1,3 @@
-
 from users.forms import RegistraionForm, LoginForm, UpdateUserForm
 from django.shortcuts import render, redirect, reverse
 from django.contrib.sites.shortcuts import get_current_site
@@ -118,4 +117,8 @@ def user_login(request):
 def index(request):
     return render(request, "users/index.html")
 # #
+
+def logout_view(request):
+    logout(request)
+    return redirect('/login')
 

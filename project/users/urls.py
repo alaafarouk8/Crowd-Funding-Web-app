@@ -16,7 +16,7 @@ urlpatterns = [
     path('register', views.register , name='register'),
     path('activate/<uidb64>/<time>',views.activate, name='activate'),
     path('login/', views.user_login , name='login'),
-    # path('logout/',views.logout_view,name='logout'),
+    path('logout/',views.logout_view,name='logout'),
     #  path('profile',views.user_profile,name="profile"),
 
     # Password reset links (ref: https://github.com/django/django/blob/master/django/contrib/auth/views.py)
