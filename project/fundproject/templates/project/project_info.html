@@ -1,0 +1,36 @@
+{%extends 'base.html'%}
+<!--{%load static%}-->
+{%block content%}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-12">
+            <img src="{{images.img.url}}" style="width:250px;height:250px"/>
+        </div>
+        <div class="col-lg-6 col-md-12">
+            <h1>{{project.title}}</h1>
+            <p>{{project.details}}</p>
+            <p> {{project.total_target}}</p>
+            <p>{{project.start_date}}</p>
+            <p>{{project.end_date}}</p>
+            <p>{{category.category_name}}</p>
+            <p>{{sum}}</p>
+            <p>{{donation.0.donation_value}}</p>
+
+            <form method="post">
+                {%csrf_token%}
+                <input type="number" name="value"/>
+                <input type="submit" class="btn btn-dark" value="donate" />
+
+            </form>
+
+
+            <p>{%for tag in tags%}
+                {{tag.tag_name}}
+                {%endfor%}
+            </p>
+
+        </div>
+    </div>
+</div>
+{%endblock%}
