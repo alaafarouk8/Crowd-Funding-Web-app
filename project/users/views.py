@@ -17,10 +17,11 @@ from rest_framework import permissions
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from fundproject.models import Project
 
 
-@api_view(['GET','DELETE','PUT'])
-def userView(request , id):
+@api_view(['GET', 'DELETE', 'PUT'])
+def userView(request, id):
     try:
         user = Users.objects.get(id=id)
     except Users.DoesNotExist:
@@ -45,7 +46,6 @@ def userView(request , id):
 class usersListView(viewsets.ModelViewSet):
     queryset = Users.objects.all()
     serializer_class = usersSerializer
-
 
 
 # Create your views here.
@@ -165,13 +165,12 @@ def logout_view(request):
     logout(request)
     return redirect('/login')
 
+
 @login_required(login_url='/login')
 def userprofile(request):
     if not request.user.is_authenticated:
         return redirect(reverse("users:login"))
     return render(request, "users/userprofile.html")
-
-
 
 
 @login_required(login_url='/login')
@@ -204,5 +203,24 @@ def editprofile(request):
 
                 }
             )
-        #context={"form": form}
-    return render(request , "users/editprofile.html" , {"form": form} )
+        # context={"form": form}
+    return render(request, "users/editprofile.html", {"form": form})
+
+
+@login_required(login_url='/login')
+def userproject(request, id):
+    user = Users.objects.get(id=id)
+    # projects = Project.objects.filter(
+    #     user=user)  # first user => forign key , second user is user which get by the previous line
+    # context = {
+    #     "user": user,
+    #     "projects": projects
+    # }
+
+    return render(request, "users/userproject.html")
+
+
+@login_required(login_url='/login')
+def userdonation(request , id):
+     user = Users.objects.get(id=id)
+     return render(request, "users/userdonation.html")

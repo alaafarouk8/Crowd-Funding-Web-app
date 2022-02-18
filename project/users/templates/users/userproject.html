@@ -1,11 +1,10 @@
 {%extends  'base.html'%}
-{% load static%}
-{% block Title %} Confirmation {% endblock %}
+{% load static %}
+{% block Title %} Projects {% endblock %}
 {% block head-css %}
 <link rel="stylesheet" href="{% static 'css/usersindex.css' %}">
-<link rel="stylesheet" href="{% static 'css/deleteconfirm.css' %}"/>
 {% endblock %}
-{% block content%}
+{% block content %}
 <div class="sidebar" style="width:15%">
     <br/>
     <br/>
@@ -16,16 +15,8 @@
     <a href="{%url 'users:logout' %}" class="w3-bar-item w3-button">Log out</a> <br> <br>
 </div>
 <div class="container" style="margin-left:20%">
-    <form method="post" action="">
-        {% csrf_token %}
-        <div class="container">
-            <h1>Delete Account</h1> <br>
-            <p>Are you sure you want to delete?</p><br>
-            <input class="btn btn-danger" type="submit" value="Yes"/>
-            <a href="{%url 'users:userprofile' %}">
-                <div class="btn btn-primary">Cancel</div>
-            </a>
-        </div>
-    </form>
-</div>
-{% endblock%}
+
+    <br>
+Hello from ay 7aga
+    </div>
+{% endblock %}
