@@ -3,6 +3,7 @@ Crowdfunding is the practice of funding a project or venture by raising small am
 
 # create database and user 
 - pip install django==3.2.10
+- pip3 install djangorestframework
 - pip install psycopg2
 - sudo -i -u postgres
 - psql
@@ -12,3 +13,7 @@ Crowdfunding is the practice of funding a project or venture by raising small am
 - grant all privileges on database fund to funduser;
 - \q
 - psql -h localhost -U funduser fund
+- psql -h localhost -U funduser fund
+- djangorestframework-3.13.1
+
+
