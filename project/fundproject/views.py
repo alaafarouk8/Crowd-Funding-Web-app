@@ -76,9 +76,10 @@ def home(request):
 
 def project_list(request, id):
     project_list = []
-    category_projects = Project.objects.filter(category_id=id).values(('project_id'))
+    category_projects = Project.objects.filter(category_id=id).values('project_id')
     for project in category_projects:
-        project_list.append(Images.objects.filter(project_id=project['id']))
+        project_list.append(Images.objects.filter(project_id=project['project_id']))
     
     context = {'project_list': project_list}
+    print(project_list)
     return render(request, 'list_projects.html',context )
