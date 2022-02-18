@@ -1,11 +1,23 @@
-{%extends 'users/index.html'%}
+
+{%extends  'base.html'%}
+
 {% load static%}
-{% block title %} Profile {% endblock %}
-{% block style %}
+{% block Title %} Profile {% endblock %}
+{% block head-css %}
+ <link rel="stylesheet" href="{% static 'css/usersindex.css' %}">
 <link rel="stylesheet" href="{% static 'css/userprofile.css' %}">
 {% endblock %}
 {% block content %}
-<div class="card mb-4 border-0">
+<div class="sidebar" style="width:15%">
+    <br/>
+    <br/>
+    <br/>
+    <a href="{% url 'users:userprofile' %}" class="w3-bar-item w3-button">Profile</a> <br> <br>
+    <a href="{%url 'users:userproject' user.id %}" class="w3-bar-item w3-button">Projects </a> <br> <br>
+    <a href="{%url 'users:userdonation' user.id %}" class="w3-bar-item w3-button">Donations</a> <br> <br>
+    <a href="{%url 'users:logout' %}" class="w3-bar-item w3-button">Log out</a> <br> <br>
+</div>
+<div class="card mb-4 border-0" style="margin-left:20%">
     <br/>
     <br/>
     <img class="img-radius profile-image" src="{{request.user.photo.url}}" alt="Card image cap">
@@ -26,6 +38,4 @@
         </p>
     </div>
 </div>
-
-
 {% endblock %}

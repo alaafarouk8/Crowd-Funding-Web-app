@@ -1,8 +1,21 @@
-{%extends 'users/index.html'%}
-{% block title %} Edit {% endblock %}
+{%extends  'base.html'%}
+{% block Title %} Edit {% endblock %}
 {% load bootstrap4 %}
+{% block head-css %}
+{% load static %}
+ <link rel="stylesheet" href="{% static 'css/usersindex.css' %}">
+{% endblock %}
 {% block content %}
-
+<div class="sidebar" style="width:15%">
+    <br/>
+    <br/>
+    <br/>
+    <a href="{% url 'users:userprofile' %}" class="w3-bar-item w3-button">Profile</a> <br> <br>
+    <a href="{%url 'users:userproject' user.id %}" class="w3-bar-item w3-button">Projects </a> <br> <br>
+    <a href="{%url 'users:userdonation' user.id %}" class="w3-bar-item w3-button">Donations</a> <br> <br>
+    <a href="{%url 'users:logout' %}" class="w3-bar-item w3-button">Log out</a> <br> <br>
+</div>
+<div class="container" style="margin-left:20%">
 <form method="post">
     <br/>
     <br/>
@@ -14,9 +27,11 @@
 <!--            -->
 <!--        </div>-->
 <!--    </div>-->
-    <button type="submit" class="btn btn-primary">
+    <br>
+    <button type="submit" class="btn btn-dark">
         Update
     </button>
 </form>
+    </div>
 
 {% endblock %}
