@@ -57,18 +57,11 @@ def list_project(request):
 # home 
 def home(request):
    
-    latestProjects = Project.objects.order_by('start_date')[0:5]
+    latestProjects = Project.objects.values('project_id').order_by('start_date')[0:5]
     latestProjectsList = []
-    for project in latestProjects:
-      
-        latestProjectsList.append({
-            'id': project.project_id,
-            'title': project.title,
-            'details': project.details,
-            'target': project.total_target,
-            'start_date': project.start_date,
-        })
-    
+    for pro in latestProjects:
+        latestProjectsList.append(Images.objects.filter(project_id=pro['project_id'])[:1])
+    print(latestProjectsList)
     categories = Categories.objects.all()
     context = {
         'latestProjectsList': latestProjectsList,
