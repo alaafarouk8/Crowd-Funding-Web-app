@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block Title %}
+Crowd Funding
+{% endblock %}
+
+{%block content%}
+<div class="container">
+    <div class="row">
+        {%for project in projects%}
+        <div class="col-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h2 class="card-title">{{project.title}}</h2>
+                    <h5 class="card-title">{{project.total_target}}</h5>
+                    <a href="#" class="btn btn-primary">Project Details</a>
+                </div>
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+</div>
+</body>
+
+<style>
+   #createProjectbtnID{
+        margin-left: auto;
+        margin: auto;
+        position: relative;
+        background-color:"green"
+   }
+
+
+
+
+
+</style>
+{%endblock content%}

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block Title %}
+Crowd Funding
+{% endblock %}
+
+{%block content%}
+<div class="container-fluid bg-light " style="margin-top:50px ; padding: 40px; border-radius: 20px;">
+    <div class="text-center " style="font-size: 50px;"> Create Project </div>
+    <form method="post" enctype="multipart/form-data">
+        {%csrf_token%}
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="projecttitleID">Project Title</label>
+                <input type="text" class="form-control" id="projecttitleID" placeholder="1234 Main St" name="title">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="ProjectImagesID">Project Images</label>
+                <input type="file" class="form-control" id="ProjectImagesID" multiple name="projectimage[]">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="projectdetailsID">Project details</label>
+            <textarea class="form-control" id="projectdetailsID" placeholder="1234 Main St"
+                name="projectdetails"></textarea>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="totaltargetID">Total Target</label>
+                <input type="text" class="form-control" id="totaltargetID" name="totaltarget">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="TagsID">Tags</label>
+                <input type="text" class="form-control" id="TagsID" name="tags">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="categoryID">Category</label>
+                <select id="categoryID" class="form-control" name="category">
+                    {%for cat in catg%}
+                    <option value="{{cat.category_name}}">{{cat.category_name}}</option>
+                    {%endfor%}
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="startdateID">Start Date</label>
+                <input type="date" class="form-control" id="startdateID" name="startdate">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="enddateID">End Date</label>
+                <input type="date" class="form-control" id="enddateID" name="enddate">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-dark d-flex justify-content-center " style="margin-top: 20px ; text-align: center; " id="createProjectbtnID">Create Project</button>
+        <p>{{msg}}</p>
+    </form>
+</div>
+
+<style>
+    #createProjectbtnID {
+        margin-left: auto;
+        margin: auto;
+        position: relative;
+        background-color: "green"
+    }
+</style>
+{%endblock content%}

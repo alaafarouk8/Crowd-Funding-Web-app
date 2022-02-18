@@ -1,17 +1,36 @@
 from django.db import models
 
 # Create your models here.
+
+
+class Categories(models.Model):
+    category_id = models.AutoField(primary_key=True)
+    category_name = models.CharField(max_length=20)
+
+
 class Project(models.Model):
     project_id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
     details = models.TextField()
-    category = models.CharField(max_length=100)
-    project_pictures = models.ImageField()
-    total_target = models.ImageField()
-    tags = models.CharField(max_length=100)
+    total_target = models.IntegerField()
     start_date = models.DateField()
     end_date = models.DateField()
-    project_show=models.BooleanField(default=0)
+    category_id = models.ForeignKey(Categories, on_delete=models.CASCADE)
+
+
+class Images (models.Model):
+    project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
+    img = models.ImageField(blank=False, null=False, upload_to='project')
+
+
+class Tags (models.Model):
+    project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
+    tag_name = models.CharField(max_length=40)
+
+
+
+
+        
 
 
 
