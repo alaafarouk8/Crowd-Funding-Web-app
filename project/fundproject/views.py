@@ -1,7 +1,7 @@
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect, HttpResponse
 from .models import *
-
+from .forms import *
 
 #######################################
 # create project
@@ -36,4 +36,23 @@ def create_project(request):
 
 ####################################
 ####################################
+
+####################################
+#List Projects
+
+def list_project(request):
+    projects = Project.objects.all()
+    images = Images.objects.all()
+
+    imgs = []
+    for project in projects:
+        img = Images.objects.filter(project_id=project.project_id)
+        imgs.append(img)
+    print(len(imgs))
+
+    context = {}
+    context['projects'] = projects
+    context['images'] = imgs
+
+    return render(request, 'project/project_list.html', context)
 
