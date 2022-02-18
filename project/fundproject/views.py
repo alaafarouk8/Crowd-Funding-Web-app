@@ -46,11 +46,11 @@ def list_project(request):
     project_list = []
     rate_list =[]
     projects = Project.objects.all()
+
+    print("AHMED ASHRAF")
     for project in projects:
         project_list.append(Images.objects.filter(project_id=project.project_id))
         rate_list.append(Rate.objects.filter(project_id=project.project_id))
-
-
 
     context = {'project_list': project_list,
                }
@@ -95,6 +95,7 @@ def project_list(request, id):
     return render(request, 'list_projects.html',context )
 
 
+
 def project_info(request, id):
     context = {}
     project_data = Project.objects.get(project_id=id)
@@ -102,6 +103,7 @@ def project_info(request, id):
     images = Images.objects.filter(project_id=project_data.project_id)
     tags = Tags.objects.filter(project_id=project_data.project_id)
     rate = Rate.objects.filter(project_id=project_data.project_id)
+    donation = Donation.objects.filter(project_id=project_data.project_id)
     sum = 0
     count = 0
     for i in rate:
@@ -113,6 +115,20 @@ def project_info(request, id):
     context['images'] = images[0]
     context['tags'] = tags
     context['sum'] = sum/count
+    context['donation'] = donation
+
+
+
+    if request.method == 'GET':
+        return render(request, 'project/project_info.html', context)
+    elif request.method == 'POST':
+        if not donation:
+            Donation.objects.create(project_id=project_data, donation_value=request.POST['value'])
+        else:
+            Donation.objects.filter(project_id=project_data).update(donation_value=F("donation_value") + request.POST["value"])
+
+        return render(request, 'project/hi.html')
+
 
     return render(request, 'project/project_info.html', context)
 

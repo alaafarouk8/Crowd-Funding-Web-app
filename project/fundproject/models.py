@@ -30,7 +30,11 @@ class Tags (models.Model):
     tag_name = models.CharField(max_length=40)
 
 
-
+class Donation(models.Model):
+    donation_id = models.AutoField(primary_key=True)
+    project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
+    # user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
+    donation_value = models.IntegerField()
 
 
 class Rate(models.Model):
@@ -42,9 +46,7 @@ class Rate(models.Model):
 
 
 
-
 class CommentReports(models.Model):
-    # comment_id = models.ForeignKey(Comment, on_delete=models.CASCADE)
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
 
 
@@ -57,6 +59,5 @@ class ProjectReports(models.Model):
 
 
         
-
 
 
