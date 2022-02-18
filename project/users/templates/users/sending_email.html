@@ -5,6 +5,10 @@
 <div class="container" style="margin-top: 30px;">
     {%if active_code == 1%}
     <h3>Thank you for your email confirmation. Now you can login your account.</h3>
+    <div class="logoin">
+        <a href="{%url 'users:login' %}" class="btn btn-outline-success  active" role="button"
+        aria-pressed="true">Login</a>
+    </div>
     {%elif active_code == 0 %}
     <h3>Activation link is valid for 24 hours only a new link has been sent to your email...</h3>
     {%elif active_code == -1 %}
@@ -13,6 +17,8 @@
     <h3>Activation link is invalid!</h3>
     {%endif%}
 </div>
+
+
 
 
 
