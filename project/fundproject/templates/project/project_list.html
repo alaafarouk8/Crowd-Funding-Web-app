@@ -23,7 +23,7 @@ Crowd Funding
                 <p class="card-text"> <Details> <span class="text-success">{{project.0.project_id.details}} </span></Details>  </p>
                 <p class="card-text">Start time : <span class="text-success">{{project.0.project_id.start_date}} </span></p>
                 <p class="card-text">End time : <span class="text-success">{{project.0.project_id.end_date}}</span></p>
-                <a class="btn btn-dark" href="{%url 'project_info' project.0.project_id.project_id%}">Open</a>
+
             </div>
 
         </div>
@@ -32,17 +32,5 @@ Crowd Funding
 
 </div>
 
-<style>
-   #createProjectbtnID{
-        margin-left: auto;
-        margin: auto;
-        position: relative;
-        background-color:"green"
-   }
 
-
-
-
-
-</style>
 {%endblock content%}

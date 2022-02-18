@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'fundproject.apps.FundprojectConfig',
     'rest_framework',
+    "mathfilters"
 ]
 
 MIDDLEWARE = [
@@ -154,4 +155,4 @@ EMAIL_HOST_USER = 'asmaatestproject@gmail.com'
 EMAIL_HOST_PASSWORD = 'yegyxqddbxujmqwv'
 
 
-
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
