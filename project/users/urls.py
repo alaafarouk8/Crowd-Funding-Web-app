@@ -9,7 +9,11 @@ from users import views
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import PasswordResetConfirmView
 from .views import userprofile
+from rest_framework import routers
+from .views import usersListView
 app_name = 'users'
+router = routers.DefaultRouter()
+router.register(r'usersListView', usersListView)
 
 urlpatterns = [
 
@@ -19,6 +23,8 @@ urlpatterns = [
     path('userprofile', views.userprofile  , name="userprofile"),
     path('deleteprofile/<int:id>/' , views.deleteprofile , name="deleteprofile"),
     path('editprofile' , views.editprofile , name="editprofile"),
+    path('users', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # path('logout/',views.logout_view,name='logout'),
     #  path('profile',views.user_profile,name="profile"),
 

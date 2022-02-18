@@ -11,6 +11,41 @@ from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.models import User
+from .serializers import usersSerializer
+from rest_framework import permissions
+from rest_framework import viewsets
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+
+@api_view(['GET','DELETE','PUT'])
+def userView(request , id):
+    try:
+        user = Users.objects.get(id=id)
+    except Users.DoesNotExist:
+        return Response("HTTP_404_NOT_FOUND")
+    if request.method == 'DELETE':
+        user.delete()
+        return Response({'msg', f'user deleted'})
+    elif request.method == 'GET':
+        res = usersSerializer(user, context={'request': request})
+        return (res.data)
+    elif request.method == 'PUT':
+        req_update = usersSerializer(user, data=request.data, context={'request': request})
+        if req_update.is_valid():
+            req_update.save()
+            return Response(req_update.data)
+        else:
+            return Response(req_update.errors)
+    else:
+        return Response({'msg': 'None'})
+
+
+class usersListView(viewsets.ModelViewSet):
+    queryset = Users.objects.all()
+    serializer_class = usersSerializer
+
 
 
 # Create your views here.

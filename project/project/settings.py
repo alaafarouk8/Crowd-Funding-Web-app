@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap4',
-    'fundproject.apps.FundprojectConfig'
+    'fundproject.apps.FundprojectConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
