@@ -57,11 +57,13 @@ def list_project(request):
 def home(request):
    
     latestProjects = Project.objects.values('project_id').order_by('start_date')[0:5]
+    FeaturedProjects = Project.objects.values('project_id')[0:5]
+
     latestProjectsList = []
     for project in latestProjects:
         latestProjectsList.append(Images.objects.filter(project_id=project['project_id']))
     featuredProjectsList = []
-    for project in latestProjects:
+    for project in FeaturedProjects:
         featuredProjectsList.append(Images.objects.filter(project_id=project['project_id']))
 
     print(latestProjectsList)
