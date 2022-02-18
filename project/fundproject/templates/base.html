@@ -37,12 +37,12 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           {%if request.session.username%}
           <li class="nav-item">
-            <a class="nav-link " href="">Logout</a>
+            <a class="nav-link" href="">Logout</a>
           </li>
           
           {%else%}
           <li class="nav-item">
-            <a class="nav-link" href="">Register</a>
+            <a class="nav-link" href="{% url 'users/register' %">Register</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="">Log In</a>
@@ -58,10 +58,10 @@
           </div>
         </ul>
 
-        <form class="d-flex">
+        <form class="d-flex" action="project/search/" method="POST">
           {% csrf_token %}
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-dark" type="submit">Search</button>
+          <input class="form-control" type="text" name="query" placeholder="Search" required/>
+          <input type="submit" class="btn btn-dark" name="Search" />
         </form>
       </div>
     </div>
@@ -71,6 +71,12 @@
     <h1>HomePage</h1>
     {%endblock%}
   </div>
+  <footer class="text-center fixed-bottom text-white">
+
+    <div class="text-center p-3 bg-dark">
+      © 2022 Copyright: Crowd Funding
+    </div>
+  </footer>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
