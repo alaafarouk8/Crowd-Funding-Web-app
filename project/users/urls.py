@@ -22,8 +22,10 @@ urlpatterns = [
     path('login/', views.user_login , name='login'),
     path('logout/',views.logout_view,name='logout'),
     path('userprofile', views.userprofile  , name="userprofile"),
-    path('deleteprofile/<int:id>/' , views.deleteprofile , name="deleteprofile"),
+    path('deleteprofile/<int:id>' , views.deleteprofile , name="deleteprofile"),
     path('editprofile' , views.editprofile , name="editprofile"),
+    path('userproject/<int:id>' , views.userproject , name="userproject"),
+    path('userdonation/<int:id>' , views.userdonation , name="userdonation"),
     path('users', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     # path('logout/',views.logout_view,name='logout'),
@@ -40,6 +42,7 @@ urlpatterns = [
      name='password_reset_done'),
 
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='users/password_reset/password_change.html'), name='password_reset_confirm'),
+
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name='users/password_reset/password_reset_form.html'), name='password_reset'),
 
 

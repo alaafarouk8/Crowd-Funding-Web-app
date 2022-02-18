@@ -1,17 +1,31 @@
-{%extends 'users/index.html'%}
+{%extends  'base.html'%}
 {% load static%}
-{% block title %} Confirmation {% endblock %}
-{% block style %}
+{% block Title %} Confirmation {% endblock %}
+{% block head-css %}
+<link rel="stylesheet" href="{% static 'css/usersindex.css' %}">
 <link rel="stylesheet" href="{% static 'css/deleteconfirm.css' %}"/>
 {% endblock %}
 {% block content%}
-<form method="post" action="" >
-   {% csrf_token %}
-    <div class="container">
-        <h1>Delete Account</h1> <br>
-     <p>Are you sure you want to delete?</p><br>
-     <input class="btn btn-danger" type="submit" value="Yes" />
-     <a href="{%url 'users:userprofile' %}"><div class="btn btn-primary">Cancel</div></a>
-    </div>
-</form>
+<div class="sidebar" style="width:15%">
+    <br/>
+    <br/>
+    <br/>
+    <a href="{% url 'users:userprofile' %}" class="w3-bar-item w3-button">Profile</a> <br> <br>
+    <a href="{%url 'users:userproject' user.id %}" class="w3-bar-item w3-button">Projects </a> <br> <br>
+    <a href="{%url 'users:userdonation' user.id %}" class="w3-bar-item w3-button">Donations</a> <br> <br>
+    <a href="{%url 'users:logout' %}" class="w3-bar-item w3-button">Log out</a> <br> <br>
+</div>
+<div class="container" style="margin-left:20%">
+    <form method="post" action="">
+        {% csrf_token %}
+        <div class="container">
+            <h1>Delete Account</h1> <br>
+            <p>Are you sure you want to delete?</p><br>
+            <input class="btn btn-danger" type="submit" value="Yes"/>
+            <a href="{%url 'users:userprofile' %}">
+                <div class="btn btn-primary">Cancel</div>
+            </a>
+        </div>
+    </form>
+</div>
 {% endblock%}
