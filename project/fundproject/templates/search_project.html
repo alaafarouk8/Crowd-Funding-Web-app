@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block Title %}
+Crowd Funding
+{% endblock %}
+
+{%block content%}
+<div class="container  bg-light" style="border-radius: 40px;">
+    <h1 class="mt-2 text-center">Search Result</h1>
+    <div class="container-fluid text-center">
+        {% if project%} 
+        <div>
+            {% for project in project_list %}
+            <div class="card col-md-4" style="border-radius:20px ; padding: 5px; margin: 5px;">
+                {% if project.0.img %}
+                {% load static %}
+                <img class="card-img-top w-100" height="200" src="{{project.0.img.url}}" alt="Card image">
+                {% else %}
+                <img class="card-img-top w-100" height="200" src="" alt="Not Found ">
+                {% endif %}
+                <div class="card-body">
+                    <h4 class="card-title">{{project.0.project_id.title}}</h4>
+                    <p class="card-text">Total target : <span class="text-success">{{project.0.project_id.total_target}}
+                            $</span></p>
+                    <p class="card-text">
+                    <Details> <span class="text-success">{{project.0.project_id.details}} </span></Details>
+                    </p>
+                    <p class="card-text">Start Date : <span class="text-success">{{project.0.project_id.start_date}} </span>
+                    </p>
+                    <p class="card-text">End Date : <span class="text-success">{{project.0.project_id.end_date}}</span></p>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+        {% else %}
+        <div>
+            <h3 class="bg-light text-center text-dark"> There is no Project with this name or tag </h3>
+        </div>
+        {% endif %}
+
+    </div>
+
+</div>
+{%endblock%}

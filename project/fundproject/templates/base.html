@@ -58,10 +58,10 @@
           </div>
         </ul>
 
-        <form class="d-flex">
+        <form class="d-flex" action="project/search/" method="POST">
           {% csrf_token %}
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-dark" type="submit">Search</button>
+          <input class="form-control" type="text" name="query" placeholder="Search" required/>
+          <input type="submit" class="btn btn-dark" name="Search" />
         </form>
       </div>
     </div>
