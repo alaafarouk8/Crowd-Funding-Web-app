@@ -22,6 +22,7 @@
 
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+
     {% block head-css %}
     <link rel="stylesheet" type="text/css" href="{% static '' %}">
     <link rel="stylesheet" type="text/css" href="{% static '' %}">
@@ -47,7 +48,7 @@
                   <a class="nav-link" href="">Log In</a>
               </li>
               {%endif%}
-                <div class="d-flex justify-content-center" style="padding-left:300px">
+                <div class="d-flex justify-content-center" >
               <li class="nav-item">
                 <a class="nav-link" href="#">Create Project</a>
               </li>
@@ -68,7 +69,7 @@
             <form class="d-flex">
                 {% csrf_token %}
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-success" type="submit" style="color:#">Search</button>
+              <button class="btn btn-dark" type="submit">Search</button>
             </form>
           </div>
         </div>

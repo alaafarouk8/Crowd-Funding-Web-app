@@ -1,7 +1,6 @@
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect, HttpResponse
 from .models import *
-from .forms import *
 
 #######################################
 # create project
