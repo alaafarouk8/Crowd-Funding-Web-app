@@ -7,12 +7,14 @@ Crowd Funding
 
 {%block content%}
 <div class="container bg-light" style="border-radius: 40px;">
-    <h1 class="mt-2 text-center">Projects</h1>
+               <h1 class="mt-2 text-center">List of Projects in <span class="text-success">{{category_name}}</span></h1>
     <div class="row">
         {% for project in project_list %}
         <div class="card col-md-4" style="border-radius:20px ; padding: 5px; margin: 5px;">
             {% if project.0.img %}
-            <img class="card-img-top w-100" height="200" src="{% static media%}{{project.0.img}}" alt="Card image">
+            <textarea> {{project.0.img}}</textarea>
+            {% load static %}
+            <img class="card-img-top w-100" height="200" src="{% static media %}{{project.0.img}}" alt="Card image">
           {% else %}
           <img class="card-img-top w-100" height="200" src="" alt="Not Found ">
           {% endif %}

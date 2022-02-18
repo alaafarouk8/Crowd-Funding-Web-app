@@ -1,4 +1,5 @@
 from multiprocessing import context
+from unicodedata import category
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect, HttpResponse
 from .models import *
@@ -76,10 +77,14 @@ def home(request):
 
 def project_list(request, id):
     project_list = []
+    category = Categories.objects.get(category_id=id)
+    category_name=category.category_name
     category_projects = Project.objects.filter(category_id=id).values('project_id')
     for project in category_projects:
         project_list.append(Images.objects.filter(project_id=project['project_id']))
     
-    context = {'project_list': project_list}
+    context = {'project_list': project_list ,
+               'category_name' :category_name
+    }
     print(project_list)
     return render(request, 'list_projects.html',context )
