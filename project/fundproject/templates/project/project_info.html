@@ -1,11 +1,11 @@
 {%extends 'base.html'%}
-<!--{%load static%}-->
+{% load mathfilters %}
 {%block content%}
 
 <div class="container">
     <div class="row">
         <div class="col-lg-6 col-md-12">
-            <img src="{{images.img.url}}" style="width:250px;height:250px"/>
+            <img src="{{images.0.img.url}}" style="width:250px;height:250px"/>
         </div>
         <div class="col-lg-6 col-md-12">
             <h1>{{project.title}}</h1>
@@ -20,9 +20,19 @@
                 {%csrf_token%}
                 <input type="number" name="value"/>
                 <input type="submit" class="btn btn-dark" value="donate" />
-
             </form>
+
+            {%if project.total_target|mul:0.25 > donation.0.donation_value%}
+            <a href="{%url 'cancel_project' project.project_id%} ">Cancel Project</a>
+            {%endif%}
             <a href="{%url 'comments' project.project_id%}" class="btn btn-dark">Add comment</a>
+            <a href="{%url 'report_project' project.project_id%}" class="btn btn-dark">report project</a>
+
+
+<!--            <form mmethod="post" action="/project/create">-->
+<!--                {%csrf_token%}-->
+<!--                <input type="submit"/>-->
+<!--            </form>-->
 
 
             <p>{%for tag in tags%}

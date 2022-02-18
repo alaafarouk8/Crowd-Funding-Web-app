@@ -1,6 +1,7 @@
 {%extends 'base.html'%}
 {%block content%}
 <form method="post">
+    {% csrf_token %}
     <input type="text" name="comment"/>
     <input type="submit" value="add comment"/>
 </form>
@@ -10,11 +11,11 @@
 {%for comment in comments%}
          <div class="card text-white bg-dark" style="margin-top:30px">
         <div class="card-body">
-      <h5 class="card-title">{{comment.comment}}</h5>
-      <a href="#" class="btn btn-danger">Go somewhere</a>
+        <h5 class="card-title">{{comment.comment}}</h5>
          </div>
         </div>
+        {%endfor%}
     </div>
 </div>
-{%endfor%}
+
     {%endblock%}

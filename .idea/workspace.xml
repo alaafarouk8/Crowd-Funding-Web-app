@@ -5,14 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3e3405ec-4c17-4b5f-8881-c17f3e57c18f" name="Changes" comment="">
+<<<<<<< HEAD
+      <change afterPath="$PROJECT_DIR$/project/fundproject/templates/project/cancel.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/fundproject/templates/project/report_comment.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project/fundproject/templates/project/report_project.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Crowd-Funding-Web-app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Crowd-Funding-Web-app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+=======
+>>>>>>> 40ba37cd03458341b6d85c10f50b0ffa71442b17
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/fundproject/migrations/0001_initial.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/project/fundproject/migrations/0002_remove_comment_user_id.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/project/fundproject/migrations/0003_remove_donation_user_id.py" beforeDir="false" />
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/project/fundproject/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/fundproject/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/fundproject/templates/project/hi.html" beforeDir="false" afterPath="$PROJECT_DIR$/project/fundproject/templates/project/hi.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/fundproject/templates/project/project_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/project/fundproject/templates/project/project_info.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/fundproject/templates/project/project_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/project/fundproject/templates/project/project_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/fundproject/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/fundproject/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/fundproject/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/fundproject/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/project/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/project/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/users/migrations/0001_initial.py" beforeDir="false" />
+=======
       <change beforePath="$PROJECT_DIR$/project/project/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/project/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/users/migrations/0001_initial.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/project/users/templates/users/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/project/users/templates/users/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/users/views.py" afterDir="false" />
+>>>>>>> 40ba37cd03458341b6d85c10f50b0ffa71442b17
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +40,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -34,7 +61,8 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../PycharmProjects/flask" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
