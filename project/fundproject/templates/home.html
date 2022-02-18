@@ -8,9 +8,12 @@ Crowd Funding
 {%block content%}
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+      aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+      aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+      aria-label="Slide 3"></button>
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -32,5 +35,26 @@ Crowd Funding
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
+</div>
+<div class="container bg-light" style="border-radius: 40px; height: 1000px; width: max-content;">
+
+  <div class="text-center " style="font-size: 50px;padding-top: 20px;"> Latest Projects</div>
+  <div class="container-fluid" style="margin-top: 40px;">
+    <div class="row">
+      {%for project in latestProjectsList %}
+      <div class="card col-md-12" style="border-radius:20px ; padding: 10px; margin: 5px;">
+        <img class="card-img-top" src="{{project.img}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{project.title}}</h5>
+          <p class="card-text">
+          <Details>{{project.details}}</Details>
+          </p>
+          <p class="card-text">Target: {{project.target}}</p>
+          <p class="card-text"><small class="textmuted">{{project.start_date}}</small></p>
+        </div>
+      </div>
+      {%endfor%}
+    </div>
+  </div>
 </div>
 {%endblock%}
