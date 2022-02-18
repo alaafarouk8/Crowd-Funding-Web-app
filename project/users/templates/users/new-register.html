@@ -6,22 +6,22 @@
 		<div class="d-flex justify-content-center h-100">
 			<div class="user_card">
 				<div class="d-flex justify-content-center">
-					<h3 id="form-title">REGISTER</h3>
+					<h2 id="form-title">REGISTER</h2>
 				</div>
 				<div class="d-flex justify-content-center form_container">
 
 					<form method="POST" action="" enctype="multipart/form-data">
 						{% csrf_token %}
                         <div class="input-group mb-2">
-							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+							<div class="input-group-append" >
+								<span class="input-group-text"><i class="fas fa-envelope-square" ></i></span>
 							</div>
 							{{form.email}}
 						</div>
 
 						<div class="input-group mb-2">
 							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-user"></i></span>
+								<span class="input-group-text"><i class="fas fa-user" ></i></span>
 							</div>
 							{{form.username}}
 						</div>
