@@ -18,4 +18,19 @@ class Project(models.Model):
     category_id = models.ForeignKey(Categories, on_delete=models.CASCADE)
 
 
+class Images (models.Model):
+    project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
+    img = models.ImageField(blank=False, null=False, upload_to='project')
+
+
+class Tags (models.Model):
+    project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
+    tag_name = models.CharField(max_length=40)
+
+
+
+
+        
+
+
 
