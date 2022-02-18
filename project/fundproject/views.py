@@ -4,7 +4,6 @@ from .models import *
 
 #######################################
 # create project
-
 def create_project(request):
     context = {}
     if request.method == 'GET':
@@ -33,12 +32,8 @@ def create_project(request):
 
         return render(request, 'project/hi.html', context)
 
-####################################
-####################################
-
-####################################
+#######################################
 #List Projects
-
 def list_project(request):
     projects = Project.objects.all()
     images = Images.objects.all()
@@ -48,10 +43,34 @@ def list_project(request):
         img = Images.objects.filter(project_id=project.project_id)
         imgs.append(img)
     print(len(imgs))
-
     context = {}
     context['projects'] = projects
     context['images'] = imgs
 
     return render(request, 'project/project_list.html', context)
+
+
+
+# home 
+def home(request):
+   
+    latestProjects = Project.objects.order_by('start_date')[:5]
+
+    # preparing Latest Projects in One List
+    latestProjectsList = []
+    for project in latestProjects:
+      
+        latestProjectsList.append({
+            'id': project.project_id,
+            'title': project.title,
+            'details': project.details,
+            'target': project.total_target,
+            'start_date': project.start_date,
+        })
+
+    context = {
+        'latestProjectsList': latestProjectsList,
+    }
+    return render(request, "home.html", context)
+
 
