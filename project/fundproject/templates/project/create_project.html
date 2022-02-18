@@ -1,23 +1,13 @@
-{%block head%}
-<title>Create Project</title>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
-        integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
-        crossorigin="anonymous"></script>
+{% extends 'base.html' %}
+{% load static %}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-      integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-{%endblock head%}
+{% block Title %}
+Crowd Funding
+{% endblock %}
 
-<body>
-<!--{% load bootstrap4 %}-->
 {%block content%}
-<div class="container">
+<div class="container-fluid bg-light " style="margin-top:50px ; padding: 40px; border-radius: 20px;">
+    <div class="text-center " style="font-size: 50px;"> Create Project </div>
     <form method="post" enctype="multipart/form-data">
         {%csrf_token%}
         <div class="form-row">
@@ -27,13 +17,14 @@
             </div>
 
             <div class="form-group col-md-6">
-            <label for="ProjectImagesID">Project Images</label>
-            <input type="file" class="form-control" id="ProjectImagesID" multiple name="projectimage[]">
+                <label for="ProjectImagesID">Project Images</label>
+                <input type="file" class="form-control" id="ProjectImagesID" multiple name="projectimage[]">
             </div>
         </div>
         <div class="form-group">
             <label for="projectdetailsID">Project details</label>
-            <textarea class="form-control" id="projectdetailsID" placeholder="1234 Main St" name="projectdetails"></textarea>
+            <textarea class="form-control" id="projectdetailsID" placeholder="1234 Main St"
+                name="projectdetails"></textarea>
         </div>
         <div class="form-row">
             <div class="form-group col-md-4">
@@ -48,7 +39,7 @@
                 <label for="categoryID">Category</label>
                 <select id="categoryID" class="form-control" name="category">
                     {%for cat in catg%}
-                        <option value="{{cat.category_name}}">{{cat.category_name}}</option>
+                    <option value="{{cat.category_name}}">{{cat.category_name}}</option>
                     {%endfor%}
                 </select>
             </div>
@@ -64,18 +55,17 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary" id="createProjectbtnID">Create Project</button>
+        <button type="submit" class="btn btn-dark d-flex justify-content-center " style="margin-top: 20px ; text-align: center; " id="createProjectbtnID">Create Project</button>
         <p>{{msg}}</p>
     </form>
 </div>
 
 <style>
-   #createProjectbtnID{
+    #createProjectbtnID {
         margin-left: auto;
         margin: auto;
         position: relative;
-        background-color:"green"
-   }
+        background-color: "green"
+    }
 </style>
 {%endblock content%}
-</body>

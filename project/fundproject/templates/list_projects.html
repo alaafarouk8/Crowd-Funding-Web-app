@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block Title %}
+Crowd Funding
+{% endblock %}
+
+{%block content%}
+<div class="container">
+    <h1 class="mt-2">Projects</h1>
+           <div class="row mt-3 mb-3">
+            {% for project in project_list %}
+               <div class="col-md-4 mt-3">
+            <div class="card mr-2"  style="height:466px;">
+                <div class="card-body">
+                     <h4 class="card-title">{{project.project_id.title}}</h4>
+                    <p class="card-text">Total target : <span class="text-info">{{project.project_id.total_target}} $</span></p>
+                    <p class="card-text">Start time : <span class="text-info">{{project.project_id.start_time}} </span></p>
+                    <p class="card-text">End time : <span class="text-info">{{project.project_id.end_time}}</span></p>
+                </div>
+            </div>
+           </div>
+           {% endfor %}
+        </div>
+    
+</div>
+{%endblock%}
