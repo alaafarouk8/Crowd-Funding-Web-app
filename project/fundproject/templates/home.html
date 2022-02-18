@@ -36,36 +36,70 @@ Crowd Funding
     <span class="visually-hidden">Next</span>
   </button>
 </div>
-<div class="container bg-light d-flex justify-content-center" style="border-radius: 40px;">
-
+<div class="container bg-light " style="border-radius: 40px;">
   <div class="text-center " style="font-size: 50px;"> Latest Projects</div>
-  <div class="container-fluid" >
-    <div class="row">
-      {%for project in latestProjectsList %}
-      <div class="card col-md-4" style="border-radius:20px ; padding: 5px; margin: 5px;">
-        <img class="card-img-top" src="{{project.img}}" alt="Card image cap">
+    <div class="row d-flex justify-content-center">
+      {% for project in latestProjectsList %}
+      <div class="card col-md-3" style="border-radius:10px ; margin:2px;">
+        {% if project.0.img %}
+        {% load static %}
+        <img class="card-img-top w-100" height="200" src="{{project.0.img.url}}" alt="Card image">
+        {% else %}
+        <img class="card-img-top w-100" height="200" src="" alt="Not Found ">
+        {% endif %}
         <div class="card-body">
-          <h5 class="card-title">{{project.title}}</h5>
-          <p class="card-text">
-          <Details>{{project.details}}</Details>
+          <h4 class="card-title">{{project.0.project_id.title}}</h4>
+          <p class="card-text">Total target : <span class="text-success">{{project.0.project_id.total_target}} $</span>
           </p>
-          <p class="card-text">Target: {{project.target}}</p>
-          <p class="card-text"><small class="textmuted">{{project.start_date}}</small></p>
+          <p class="card-text">
+          <Details> <span class="text-success">{{project.0.project_id.details}} </span></Details>
+          </p>
+          <p class="card-text">Start Date : <span class="text-success">{{project.0.project_id.start_date}} </span>
+          </p>
+          <p class="card-text">End Date : <span class="text-success">{{project.0.project_id.end_date}}</span></p>
         </div>
+
       </div>
       {%endfor%}
-    </div>
   </div>
 </div>
-<div class="container bg-light" style="border-radius: 40px">
-  <h1 class="mt-2">Categories</h1>
-  <div class="row mt-2 mb-5">
-      {% for category in categories %}
-      <div class="col-md-3">
-        <a href="projectlist/{{category.category_id}}" target="_blank">{{category.category_name}}</a>
-      </div>
-      {% endfor %}
+<div class="container bg-light " style="margin-top:40px ; border-radius: 40px;">
+  <div class="text-center " style="font-size: 50px;"> Featured Projects</div>
+  <div class="row d-flex justify-content-center">
+    {% for project in featuredProjectsList %}
+      <div class="card col-md-3" style="border-radius:20px ; padding: 5px; margin: 5px;">
+        {% if project.0.img %}
+        {% load static %}
+        <img class="card-img-top w-100" height="200" src="{{project.0.img.url}}" alt="Card image">
+        {% else %}
+        <img class="card-img-top w-100" height="200" src="" alt="Not Found ">
+        {% endif %}
+        <div class="card-body">
+          <h4 class="card-title">{{project.0.project_id.title}}</h4>
+          <p class="card-text">Total target : <span class="text-success">{{project.0.project_id.total_target}} $</span>
+          </p>
+          <p class="card-text">
+          <Details> <span class="text-success">{{project.0.project_id.details}} </span></Details>
+          </p>
+          <p class="card-text">Start Date : <span class="text-success">{{project.0.project_id.start_date}} </span>
+          </p>
+          <p class="card-text">End Date : <span class="text-success">{{project.0.project_id.end_date}}</span></p>
+        </div>
 
+      </div>
+      {%endfor%}
+  </div>
+</div>
+
+<div class="container bg-light " style="margin-top:40px ; border-radius: 40px;">
+  <div class="text-center " style="font-size: 50px;">Categories</div> 
+  <div class="row mt-2 mb-5">
+    {% for category in categories %}
+    <div class="col-md-3 text-center text-dark">
+      <a href="projectlist/{{category.category_id}}" class="text-dark" style="text-decoration: none; "><h3>{{category.category_name}}</h3></a>
+    </div>
+    {% endfor %}
+</div>
   </div>
 
 </div>

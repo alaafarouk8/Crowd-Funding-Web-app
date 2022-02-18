@@ -44,7 +44,7 @@ class Rate(models.Model):
 
 
 class CommentReports(models.Model):
-    comment_id = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    # comment_id = models.ForeignKey(Comment, on_delete=models.CASCADE)
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
 
 
