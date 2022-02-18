@@ -1,0 +1,75 @@
+{%block head%}
+<title>Create Project</title>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
+        integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
+        crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+      integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+{%endblock head%}
+
+<body>
+<!--{% load bootstrap4 %}-->
+{%block content%}
+<div class="container">
+    <form method="post" enctype="multipart/form-data">
+        {%csrf_token%}
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="projecttitleID">Project Title</label>
+                <input type="text" class="form-control" id="projecttitleID" placeholder="1234 Main St" name="title">
+            </div>
+
+            
+        </div>
+        <div class="form-group">
+            <label for="projectdetailsID">Project details</label>
+            <textarea class="form-control" id="projectdetailsID" placeholder="1234 Main St" name="projectdetails"></textarea>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="totaltargetID">Total Target</label>
+                <input type="text" class="form-control" id="totaltargetID" name="totaltarget">
+            </div>
+            
+            <div class="form-group col-md-4">
+                <label for="categoryID">Category</label>
+                <select id="categoryID" class="form-control" name="category">
+                    {%for cat in catg%}
+                        <option value="{{cat.category_name}}">{{cat.category_name}}</option>
+                    {%endfor%}
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="startdateID">Start Date</label>
+                <input type="date" class="form-control" id="startdateID" name="startdate">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="enddateID">End Date</label>
+                <input type="date" class="form-control" id="enddateID" name="enddate">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="createProjectbtnID">Create Project</button>
+        <p>{{msg}}</p>
+    </form>
+</div>
+
+<style>
+   #createProjectbtnID{
+        margin-left: auto;
+        margin: auto;
+        position: relative;
+        background-color:"green"
+   }
+</style>
+{%endblock content%}
+</body>
