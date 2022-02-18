@@ -133,6 +133,22 @@ def project_info(request, id):
     return render(request, 'project/project_info.html', context)
 
 
+def add_comment(request, id):
+    project = Project.objects.get(project_id=id)
+    context = {}
+    context['project'] = project
+    print(project)
+    if request.method == "GET":
+        return render(request, 'project/hi.html', context)
+
+    if request.method == "POST":
+        project = Project.objects.get(project_id=id)
+        comment = Comment.objects.filter(project_id=id)
+        Comment.objects.create(project_id=project, comment=request.POST['comment'])
+        return render(request, 'project/hi.html')
+
+
+
 # --------------------------------- Search Function-----------------------------------------
 # we use Q objects to make more complex queries following
 # Use | (OR) operator to search for only one field. For example, when searching title | content, both don’t have to be true, only one is okay, when searching for a word such as “python”, so it(python) doesn’t have to be contained in both title and content fields

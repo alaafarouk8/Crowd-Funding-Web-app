@@ -33,7 +33,7 @@ class Tags (models.Model):
 class Donation(models.Model):
     donation_id = models.AutoField(primary_key=True)
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
-    # user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
     donation_value = models.IntegerField()
 
 
@@ -44,9 +44,15 @@ class Rate(models.Model):
     rate = models.IntegerField()
 
 
+class Comment(models.Model):
+    comment_id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
+    project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
+    comment = models.TextField(default=' ')
 
 
 class CommentReports(models.Model):
+    comment_id = models.ForeignKey(Comment, on_delete=models.CASCADE)
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
 
 

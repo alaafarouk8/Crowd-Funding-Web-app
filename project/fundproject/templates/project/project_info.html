@@ -16,13 +16,13 @@
             <p>{{category.category_name}}</p>
             <p>{{sum}}</p>
             <p>{{donation.0.donation_value}}</p>
-
             <form method="post">
                 {%csrf_token%}
                 <input type="number" name="value"/>
                 <input type="submit" class="btn btn-dark" value="donate" />
 
             </form>
+            <a href="{%url 'comments' project.project_id%}" class="btn btn-dark">Add comment</a>
 
 
             <p>{%for tag in tags%}

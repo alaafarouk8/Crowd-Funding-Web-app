@@ -9,8 +9,7 @@ urlpatterns = [
     path('/project_list', views.list_project, name="list_project"),
     path('/projectlist/<id>', views.project_list, name="project_list"),
     path('/project_info/<id>', views.project_info, name='project_info'),
-    path('/project/search/', views.search, name='search'),
+    path('/comments/<id>', views.add_comment, name='comments'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
 
 
