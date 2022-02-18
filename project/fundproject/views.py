@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect, HttpResponse
 from .models import *
@@ -55,7 +56,6 @@ def list_project(request):
 def home(request):
    
     latestProjects = Project.objects.order_by('start_date')[0:5]
-
     latestProjectsList = []
     for project in latestProjects:
       
@@ -66,10 +66,19 @@ def home(request):
             'target': project.total_target,
             'start_date': project.start_date,
         })
-
+    
+    categories = Categories.objects.all()
     context = {
         'latestProjectsList': latestProjectsList,
+        'categories' :categories , 
     }
     return render(request, "home.html", context)
 
-
+def project_list(request, id):
+    project_list = []
+    category_projects = Project.objects.filter(category_id=id).values(('project_id'))
+    for project in category_projects:
+        project_list.append(Images.objects.filter(project_id=project['id']))
+    
+    context = {'project_list': project_list}
+    return render(request, 'list_projects.html',context )
