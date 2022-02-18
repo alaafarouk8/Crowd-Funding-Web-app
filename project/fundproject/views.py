@@ -3,6 +3,7 @@ from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect, HttpResponse
 from .models import *
 
+
 #######################################
 # create project
 def create_project(request):
