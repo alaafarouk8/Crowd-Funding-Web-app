@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from .models import *
 from django.db.models import Sum, Count, F
 from users.models import Users
-from django.db.models import Q  
+from django.db.models import Q , Max , Min
 
 
 #######################################
@@ -62,19 +62,27 @@ def home(request):
    
     latestProjects = Project.objects.values('project_id').order_by('start_date')[0:5]
     FeaturedProjects = Project.objects.values('project_id')[0:5]
+    topratedProjects = Rate.objects.values('project_id').annotate(rate=Max('rate')).order_by('-rate')[0:5]
+
     latestProjectsList = []
+
     for project in latestProjects:
         latestProjectsList.append(Images.objects.filter(project_id=project['project_id']))
     featuredProjectsList = []
+
     for project in FeaturedProjects:
         featuredProjectsList.append(Images.objects.filter(project_id=project['project_id']))
+    topRatedProjectsList = []
 
-    print(latestProjectsList)
+    for project in topratedProjects:
+        topRatedProjectsList.append(Images.objects.filter(project_id=project['project_id']))
+    print(topRatedProjectsList)
     categories = Categories.objects.all()
     context = {
         'latestProjectsList': latestProjectsList,
         'categories' :categories , 
         'featuredProjectsList':featuredProjectsList,
+        'topRatedProjectsList':topRatedProjectsList,
     }
     return render(request, "home.html", context)
 
