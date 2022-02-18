@@ -36,13 +36,13 @@ Crowd Funding
     <span class="visually-hidden">Next</span>
   </button>
 </div>
-<div class="container bg-light" style="border-radius: 40px; height: 1000px; width: max-content;">
+<div class="container bg-light d-flex justify-content-center" style="border-radius: 40px;">
 
-  <div class="text-center " style="font-size: 50px;padding-top: 20px;"> Latest Projects</div>
-  <div class="container-fluid" style="margin-top: 40px;">
+  <div class="text-center " style="font-size: 50px;"> Latest Projects</div>
+  <div class="container-fluid" >
     <div class="row">
       {%for project in latestProjectsList %}
-      <div class="card col-md-12" style="border-radius:20px ; padding: 10px; margin: 5px;">
+      <div class="card col-md-4" style="border-radius:20px ; padding: 5px; margin: 5px;">
         <img class="card-img-top" src="{{project.img}}" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title">{{project.title}}</h5>
@@ -56,5 +56,17 @@ Crowd Funding
       {%endfor%}
     </div>
   </div>
+</div>
+<div class="container bg-light" style="border-radius: 40px">
+  <h1 class="mt-2">Categories</h1>
+  <div class="row mt-2 mb-5">
+      {% for category in categories %}
+      <div class="col-md-3">
+        <a href="projectlist/{{category.category_id}}" target="_blank">{{category.category_name}}</a>
+      </div>
+      {% endfor %}
+
+  </div>
+
 </div>
 {%endblock%}
