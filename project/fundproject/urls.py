@@ -8,7 +8,7 @@ urlpatterns = [
     path('/createproject', views.create_project, name="create_project"),
     path('/project_list', views.list_project, name="list_project"),
     path('/projectlist/<id>', views.project_list, name="project_list"),
-
+    path('/project/search/', views.search, name='search')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
