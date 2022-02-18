@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'fundproject.apps.FundprojectConfig',
     'rest_framework',
+    "mathfilters"
 ]
 
 MIDDLEWARE = [
