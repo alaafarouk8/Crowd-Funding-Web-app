@@ -36,12 +36,11 @@ Crowd Funding
     <span class="visually-hidden">Next</span>
   </button>
 </div>
-<div class="container bg-light d-flex justify-content-center" style="border-radius: 40px;">
+<div class="container bg-light " style="border-radius: 40px;">
   <div class="text-center " style="font-size: 50px;"> Latest Projects</div>
-  <div class="container-fluid">
-    <div class="row">
+    <div class="row d-flex justify-content-center">
       {% for project in latestProjectsList %}
-      <div class="card col-md-4" style="border-radius:20px ; padding: 5px; margin: 5px;">
+      <div class="card col-md-3" style="border-radius:10px ; margin:2px;">
         {% if project.0.img %}
         {% load static %}
         <img class="card-img-top w-100" height="200" src="{{project.0.img.url}}" alt="Card image">
@@ -62,15 +61,13 @@ Crowd Funding
 
       </div>
       {%endfor%}
-    </div>
   </div>
 </div>
-<div class="container bg-light d-flex justify-content-center" style="margin-top:40px ; border-radius: 40px;">
+<div class="container bg-light " style="margin-top:40px ; border-radius: 40px;">
   <div class="text-center " style="font-size: 50px;"> Featured Projects</div>
-  <div class="container-fluid">
-    <div class="row">
-      {% for project in featuredProjectsList %}
-      <div class="card col-md-4" style="border-radius:20px ; padding: 5px; margin: 5px;">
+  <div class="row d-flex justify-content-center">
+    {% for project in featuredProjectsList %}
+      <div class="card col-md-3" style="border-radius:20px ; padding: 5px; margin: 5px;">
         {% if project.0.img %}
         {% load static %}
         <img class="card-img-top w-100" height="200" src="{{project.0.img.url}}" alt="Card image">
@@ -91,19 +88,18 @@ Crowd Funding
 
       </div>
       {%endfor%}
-    </div>
   </div>
 </div>
 
-<div class="container bg-light" style="border-radius: 40px">
-  <h1 class="mt-2">Categories</h1>
+<div class="container bg-light " style="margin-top:40px ; border-radius: 40px;">
+  <div class="text-center " style="font-size: 50px;">Categories</div> 
   <div class="row mt-2 mb-5">
     {% for category in categories %}
-    <div class="col-md-3">
-      <a href="projectlist/{{category.category_id}}" target="_blank">{{category.category_name}}</a>
+    <div class="col-md-3 text-center text-dark">
+      <a href="projectlist/{{category.category_id}}" class="text-dark" style="text-decoration: none; "><h3>{{category.category_name}}</h3></a>
     </div>
     {% endfor %}
-
+</div>
   </div>
 
 </div>

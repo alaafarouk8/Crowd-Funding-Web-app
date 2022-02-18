@@ -37,12 +37,12 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           {%if request.session.username%}
           <li class="nav-item">
-            <a class="nav-link " href="">Logout</a>
+            <a class="nav-link" href="">Logout</a>
           </li>
           
           {%else%}
           <li class="nav-item">
-            <a class="nav-link" href="">Register</a>
+            <a class="nav-link" href="{% url 'users/register' %">Register</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="">Log In</a>
@@ -71,6 +71,17 @@
     <h1>HomePage</h1>
     {%endblock%}
   </div>
+  <footer class="text-center text-white">
+    <!-- Grid container -->
+    <div class="container p-4"></div>
+    <!-- Grid container -->
+  
+    <!-- Copyright -->
+    <div class="text-center p-3 bg-dark">
+      © 2022 Copyright: Crowd Funding
+    </div>
+    <!-- Copyright -->
+  </footer>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
