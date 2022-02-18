@@ -56,7 +56,6 @@ def home(request):
    
     latestProjects = Project.objects.order_by('start_date')[:5]
 
-    # preparing Latest Projects in One List
     latestProjectsList = []
     for project in latestProjects:
       
