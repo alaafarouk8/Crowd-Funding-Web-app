@@ -1,1 +1,20 @@
-<h1>HiIIIIIIIIIIII</h1>
+{%extends 'base.html'%}
+{%block content%}
+<form method="post">
+    <input type="text" name="comment"/>
+    <input type="submit" value="add comment"/>
+</form>
+<div class="container">
+    <div class="row">
+
+{%for comment in comments%}
+         <div class="card text-white bg-dark" style="margin-top:30px">
+        <div class="card-body">
+      <h5 class="card-title">{{comment.comment}}</h5>
+      <a href="#" class="btn btn-danger">Go somewhere</a>
+         </div>
+        </div>
+    </div>
+</div>
+{%endfor%}
+    {%endblock%}

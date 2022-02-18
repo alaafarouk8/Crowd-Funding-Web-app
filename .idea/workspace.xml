@@ -5,11 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3e3405ec-4c17-4b5f-8881-c17f3e57c18f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/project/project/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/project/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/users/templates/users/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/project/users/templates/users/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/users/templates/users/new-login.html" beforeDir="false" afterPath="$PROJECT_DIR$/project/users/templates/users/new-login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/users/templates/users/new-register.html" beforeDir="false" afterPath="$PROJECT_DIR$/project/users/templates/users/new-register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/users/templates/users/password_reset/base2.html" beforeDir="false" afterPath="$PROJECT_DIR$/project/users/templates/users/password_reset/base2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/users/templates/users/password_reset/password_change.html" beforeDir="false" afterPath="$PROJECT_DIR$/project/users/templates/users/password_reset/password_change.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/users/templates/users/password_reset/password_change_done.html" beforeDir="false" afterPath="$PROJECT_DIR$/project/users/templates/users/password_reset/password_change_done.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/users/templates/users/password_reset/password_reset_complete.html" beforeDir="false" afterPath="$PROJECT_DIR$/project/users/templates/users/password_reset/password_reset_complete.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/users/templates/users/password_reset/password_reset_done.html" beforeDir="false" afterPath="$PROJECT_DIR$/project/users/templates/users/password_reset/password_reset_done.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/users/templates/users/password_reset/password_reset_email.html" beforeDir="false" afterPath="$PROJECT_DIR$/project/users/templates/users/password_reset/password_reset_email.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/users/templates/users/password_reset/password_reset_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/project/users/templates/users/password_reset/password_reset_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/users/templates/users/sending_email.html" beforeDir="false" afterPath="$PROJECT_DIR$/project/users/templates/users/sending_email.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/users/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/project/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/users/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,16 +74,5 @@
       <updated>1644916195427</updated>
     </task>
     <servers />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>8</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
