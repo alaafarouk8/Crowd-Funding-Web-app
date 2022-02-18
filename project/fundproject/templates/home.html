@@ -39,41 +39,41 @@ Crowd Funding
 <div class="container bg-light d-flex justify-content-center" style="border-radius: 40px;">
 
   <div class="text-center " style="font-size: 50px;"> Latest Projects</div>
-  <div class="container-fluid" >
+  <div class="container-fluid">
     <div class="row">
       {% for project in latestProjectsList %}
       <div class="card col-md-4" style="border-radius:20px ; padding: 5px; margin: 5px;">
-          {% if project.0.img %}
-          {% load static %}
-          <img class="card-img-top w-100" height="200" src="{{project.0.img.url}}" alt="Card image">
-          {% else %}
-          <img class="card-img-top w-100" height="200" src="" alt="Not Found ">
-          {% endif %}
-          <div class="card-body">
-              <h4 class="card-title">{{project.0.project_id.title}}</h4>
-              <p class="card-text">Total target : <span class="text-success">{{project.0.project_id.total_target}}
-                      $</span></p>
-              <p class="card-text">
-              <Details> <span class="text-success">{{project.0.project_id.details}} </span></Details>
-              </p>
-              <p class="card-text">Start time : <span class="text-success">{{project.0.project_id.start_date}} </span>
-              </p>
-              <p class="card-text">End time : <span class="text-success">{{project.0.project_id.end_date}}</span></p>
-          </div>
+        {% if project.0.img %}
+        {% load static %}
+        <img class="card-img-top w-100" height="200" src="{{project.0.img.url}}" alt="Card image">
+        {% else %}
+        <img class="card-img-top w-100" height="200" src="" alt="Not Found ">
+        {% endif %}
+        <div class="card-body">
+          <h4 class="card-title">{{project.0.project_id.title}}</h4>
+          <p class="card-text">Total target : <span class="text-success">{{project.0.project_id.total_target}} $</span>
+          </p>
+          <p class="card-text">
+          <Details> <span class="text-success">{{project.0.project_id.details}} </span></Details>
+          </p>
+          <p class="card-text">Start time : <span class="text-success">{{project.0.project_id.start_date}} </span>
+          </p>
+          <p class="card-text">End time : <span class="text-success">{{project.0.project_id.end_date}}</span></p>
+        </div>
 
       </div>
       {%endfor%}
-  </div>
+    </div>
   </div>
 </div>
 <div class="container bg-light" style="border-radius: 40px">
   <h1 class="mt-2">Categories</h1>
   <div class="row mt-2 mb-5">
-      {% for category in categories %}
-      <div class="col-md-3">
-        <a href="projectlist/{{category.category_id}}" target="_blank">{{category.category_name}}</a>
-      </div>
-      {% endfor %}
+    {% for category in categories %}
+    <div class="col-md-3">
+      <a href="projectlist/{{category.category_id}}" target="_blank">{{category.category_name}}</a>
+    </div>
+    {% endfor %}
 
   </div>
 
