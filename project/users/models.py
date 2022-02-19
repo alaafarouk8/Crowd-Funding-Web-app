@@ -29,6 +29,7 @@ class CustomAccountManager(BaseUserManager):
         return self.create_user(email, username, first_name, password, **other_fields)
 
 class Users(AbstractBaseUser, PermissionsMixin):
+  #  id= models.AutoField(primary_key=True)
     phone_regex = RegexValidator(regex=r'^01[1|0|2|5][0-9]{8}$',message='phone must be an egyptian phone number...')
     username = models.CharField(verbose_name="user_name" ,null=False, max_length=50)
     first_name = models.CharField(verbose_name="first_name" ,null=False, max_length=50)
