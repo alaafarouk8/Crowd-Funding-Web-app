@@ -146,6 +146,7 @@ def user_login(request):
                     login(request, user)
                     print(user)
                     request.session['usernew']=user.first_name
+                    request.session['id']=user.id
                     return render(request, "users/index.html")
             # else:
             #     messages.info(request,'invalid login data...')
