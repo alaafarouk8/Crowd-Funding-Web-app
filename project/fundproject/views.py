@@ -115,6 +115,7 @@ def project_info(request, id):
     counter = 0
     project_list = []
     projects = Project.objects.all()
+    print(images)
 
     for project in projects:
         project_list.append(Images.objects.filter(project_id=project.project_id))
@@ -131,8 +132,8 @@ def project_info(request, id):
     context['tags'] = tags
     context['sum'] = sum
     context['count'] = count
-    context['project_list'] = project_list
     context['donation'] = donation
+    context['project_list'] = project_list
 
     # percentage = (donation[0].donation_value/project_data.total_target)*100
 
