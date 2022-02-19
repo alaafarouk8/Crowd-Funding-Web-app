@@ -2,12 +2,44 @@
 {% load mathfilters %}
 {%block content%}
 
-<div class="container">
+<div class="container text-center">
     <div class="row">
-        <div class="col-lg-6 col-md-12">
-            <img src="{{images.0.img.url}}" style="width:250px;height:250px"/>
+        <div class="col-lg-12 ">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <ol class="carousel-indicators">
+                    {% for project in project_list%}
+                    <li data-target="#carouselExampleIndicators" data-slide-to={{forloop.counter0}}></li>
+                    {% endfor %}
+                </ol>
+                <div class="carousel-inner">
+                    {% for image in images %}
+                    {% if forloop.first %}
+
+                    <div class="carousel-item active ">
+                        {% else %}
+                        <div class="carousel-item  ">
+                            {% endif %}
+                            <img style="width:100%;height:500px;" src="{{image.img.url}}">
+                        </div>
+                        {% endfor %}
+                    </div>
+
+
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only"></span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only"></span>
+                    </a>
+                </div>
+
+
+            </div>
+
         </div>
-        <div class="col-lg-6 col-md-12">
+        <div class="col-lg-12 " style="margin-bottom:200px">
             <h1>{{project.title}}</h1>
             <p>Details: {{project.details}}</p>
             <p>Total target: {{project.total_target}}</p>
@@ -18,6 +50,10 @@
             <p>Rate {{sum|div:count}}</p>
             {%endif%}
             <p>Donations: {{donation.0.donation_value}}</p>
+            <p>{%for tag in tags%}
+                tags: {{tag.tag_name}}
+                {%endfor%}
+            </p>
             <form method="post">
                 {%csrf_token%}
                 <input type="number" name="value"/>
@@ -28,7 +64,7 @@
             <a href="{%url 'cancel_project' project.project_id%} ">Cancel Project</a>
             {%endif%}
             <a href="{%url 'comments' project.project_id%}" class="btn btn-dark">Add comment</a>
-            <a href="{%url 'report_project' project.project_id%}" class="btn btn-dark">report project</a>
+            <a href="{%url 'report_project' project.project_id%}" class="btn btn-dark" >report project</a>
 
 
             <!--            <form mmethod="post" action="/project/create">-->
@@ -37,44 +73,10 @@
             <!--            </form>-->
 
 
-            <p>{%for tag in tags%}
-                {{tag.tag_name}}
-                {%endfor%}
-            </p>
-
         </div>
     </div>
 
-
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-        <ol class="carousel-indicators">
-            {% for project in project_list%}
-            <li data-target="#carouselExampleIndicators" data-slide-to={{forloop.counter0}}></li>
-            {% endfor %}
-        </ol>
-        <div class="carousel-inner">
-            {% for project in project_list.0%}
-
-            {% if forloop.first %}
-            <div class="carousel-item active ">
-                {% else %}
-                <div class="carousel-item  ">
-                    {% endif %}
-                        <img style="width:100%;height:500px;" src="{{project.img.url}}">
-                </div>
-                {% endfor %}
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only"></span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only"></span>
-            </a>
-        </div>
-
-
-    </div>
 </div>
+
+
 {%endblock%}
