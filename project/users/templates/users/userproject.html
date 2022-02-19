@@ -15,8 +15,43 @@
     <a href="{%url 'users:logout' %}" class="w3-bar-item w3-button">Log out</a> <br> <br>
 </div>
 <div class="container" style="margin-left:20%">
-
     <br>
-Hello from ay 7aga
+    <h2> Hy! {{request.user.username}}</h2>
+    <!--    <h6 >Your No. of projects is <span style="color:green">{{ projects.count }} </span> </h6>-->
+    <div class="container">
+        {% if projects.count == 0 %}
+        <div style="color:red"> Unfortunately, you don't have any project</div>
+        {% else %}
+<!--        <table class="table">-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th scope="col">#</th>-->
+<!--                <th scope="col">Title</th>-->
+<!--                <th scope="col">Start Date</th>-->
+<!--                <th scope="col">End Date</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--             <tbody>-->
+<!--                {%for project in projects %}-->
+<!--                    <th scope="row">{{ forloop.counter }}</th>-->
+<!--                    <tr> {{project.title}} </tr>-->
+<!--                    <tr> {{ project.start_date }}</tr>-->
+<!--                    <tr>{{ project.end_date }}</tr>-->
+<!--                {% endfor %}-->
+<!--             </tbody>-->
+<!--        </table>-->
+        {%for project in projects %}
+        <div>
+          <br>
+          <span style="color:green; font-weight: bold; " >Number: </span> {{ forloop.counter }} <br>
+          <span style="color:green; font-weight: bold; ">Title:  </span> {{ project.title }} <br>
+          <span style="color:green; font-weight: bold;">Start Date:  </span> {{ project.start_date }} <br>
+          <span style="color:green; font-weight: bold;" >End Date: </span>  {{ project.end_date }} <br>
+          <br>
+        </div>
+        {% endfor %}
+        {% endif %}
     </div>
+
+</div>
 {% endblock %}
