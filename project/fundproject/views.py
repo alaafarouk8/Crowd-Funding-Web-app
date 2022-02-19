@@ -3,7 +3,7 @@ from multiprocessing import context
 from queue import Empty
 from unicodedata import category
 from django.core.files.storage import FileSystemStorage
-from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect,reverse
 from .models import *
 from django.db.models import Sum, Count, F
 from users.models import Users
@@ -27,9 +27,7 @@ def create_project(request):
         project_End_date = request.POST['enddate']
         images = request.FILES.getlist('projectimage[]')
 
-        project = Project.objects.create(title=project_title, details=project_details, total_target=total_target,
-                                         start_date=project_Start_date, end_date=project_End_date, category_id=category,
-                                         user_id_id=request.session.get('id'))
+        project = Project.objects.create(title=project_title, details=project_details, total_target=total_target,start_date=project_Start_date, end_date=project_End_date, category_id=category,user_id_id=request.session.get('id'))
 
         if images:
             for i in images:
@@ -133,8 +131,9 @@ def project_info(request, id):
     context['tags'] = tags
     context['sum'] = sum
     context['count'] = count
+    context['project_list'] = project_list
     context['donation'] = donation
-    context['project_list']=project_list
+
     # percentage = (donation[0].donation_value/project_data.total_target)*100
 
 
@@ -142,12 +141,18 @@ def project_info(request, id):
         return render(request, 'project/project_info.html', context)
     elif request.method == 'POST':
         if not donation:
-            Donation.objects.create(project_id=project_data, donation_value=request.POST['value'])
-        else:
-            Donation.objects.filter(project_id=project_data).update(
-                donation_value=F("donation_value") + request.POST["value"])
+            Donation.objects.create(project_id=project_data, donation_value=request.POST['value'], user_id_id=request.session.get('id'))
+            return render(request, 'project/project_info.html', context)
 
-        return render(request, 'project/hi.html')
+        else:
+            Donation.objects.filter(project_id=project_data, user_id_id=request.session.get('id')).update(
+                donation_value=F("donation_value") + request.POST.get("value"))
+
+        return redirect(f'/project/project_info/{project_data.project_id}')
+
+
+
+
 
     return render(request, 'project/project_info.html', context)
 
@@ -155,14 +160,17 @@ def project_info(request, id):
 def add_comment(request, id):
     project = Project.objects.get(project_id=id)
     comments = Comment.objects.filter(project_id=project.project_id)
+    user = request.session.get('id')
+
     context = {}
     context['project'] = project
     context['comments'] = comments
+    context['user'] = user
     if request.method == "GET":
         return render(request, 'project/hi.html', context)
 
     elif request.method == "POST":
-        Comment.objects.create(project_id=project, comment=request.POST['comment'])
+        Comment.objects.create(project_id=project, comment=request.POST['comment'], user_id_id=request.session.get('id'))
 
         return render(request, 'project/hi.html', context)
 
@@ -179,29 +187,34 @@ def cancel_project(request, id):
 
 
 def report_project(request, id):
+    context={}
+    context['id'] = id
+    project = Project.objects.get(project_id=id)
+
     if request.method == 'GET':
-        return render(request, 'project/report_project.html')
+        return render(request, 'project/report_project.html', context)
 
     elif request.method == 'POST':
-        project = Project.objects.get(project_id=id)
-        ProjectReports.objects.create(project_id_id=project.project_id, message='this project')
+        ProjectReports.objects.create(project_id_id=project.project_id, message='this project', user_id_id=request.session.get('id'))
 
-        return render(request, 'project/hi.html')
+    return redirect(f'/project/project_info/{project.project_id}')
 
 
 def report_comment(request, id):
+    comments = Comment.objects.filter(comment_id=id)
+    project = Comment.objects.filter(project_id=comments[0].project_id)
+
     if request.method == 'GET':
         return render(request, 'project/report_comment.html')
     if request.method == 'POST':
-        project = Project.objects.get(project_id=id)
-        comments = Comment.objects.filter(project_id=project.project_id)
+        # project = Project.objects.get(project_id=id)
         context = {}
-        context['project'] = project
+        # context['project'] = project
         context['comments'] = comments
         comment = Comment.objects.get(comment_id=id)
-        CommentReports.objects.create(comment_id_id=comment.comment_id)
-        return render(request,'project/hi.html' , context)
-
+        CommentReports.objects.create(comment_id_id=comment.comment_id, user_id_id=request.session.get('id'))
+        # return render(request,'project/hi.html', context)
+        return redirect(f'/project/comments/{project[0].project_id.project_id}')
 # def image_slider(request):
 #     project_list = []
 #     rate_list =[]
