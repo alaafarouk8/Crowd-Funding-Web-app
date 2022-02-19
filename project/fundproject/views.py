@@ -3,11 +3,11 @@ from multiprocessing import context
 from queue import Empty
 from unicodedata import category
 from django.core.files.storage import FileSystemStorage
-from django.shortcuts import render, redirect, HttpResponse,HttpResponseRedirect
+from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect
 from .models import *
 from django.db.models import Sum, Count, F
 from users.models import Users
-from django.db.models import Q , Max , Min
+from django.db.models import Q, Max, Min
 
 
 #######################################
@@ -19,7 +19,7 @@ def create_project(request):
         context['catg'] = categories
         return render(request, 'project/create_project.html', context)
     elif request.method == 'POST':
-        project_title = request.POST['title']
+        project_title = request.POST['project_title']
         project_details = request.POST['projectdetails']
         total_target = request.POST['totaltarget']
         category = Categories.objects.get(category_name=request.POST['category'])
@@ -28,7 +28,8 @@ def create_project(request):
         images = request.FILES.getlist('projectimage[]')
 
         project = Project.objects.create(title=project_title, details=project_details, total_target=total_target,
-                          start_date=project_Start_date, end_date=project_End_date, category_id=category)
+                                         start_date=project_Start_date, end_date=project_End_date, category_id=category,
+                                         user_id_id=request.session.get('id'))
 
         if images:
             for i in images:
@@ -37,14 +38,15 @@ def create_project(request):
 
         for tag in request.POST["tags"].split(","):
             Tags(project_id=project, tag_name=tag).save()
+        return redirect('list_project')
+        #return render(request, 'project/project_list.html', context)
 
-        return render(request, 'project/hi.html', context)
 
 #######################################
-#List Projects
+# List Projects
 def list_project(request):
     project_list = []
-    rate_list =[]
+    rate_list = []
     projects = Project.objects.all()
 
     for project in projects:
@@ -58,7 +60,6 @@ def list_project(request):
 
 # --------------------------------- HOME Page -----------------------------------------
 def home(request):
-   
     latestProjects = Project.objects.values('project_id').order_by('start_date')[0:5]
     FeaturedProjects = Project.objects.values('project_id')[0:5]
     topratedProjects = Rate.objects.values('project_id').annotate(rate=Max('rate')).order_by('-rate')[0:5]
@@ -79,28 +80,28 @@ def home(request):
     categories = Categories.objects.all()
     context = {
         'latestProjectsList': latestProjectsList,
-        'categories' :categories , 
-        'featuredProjectsList':featuredProjectsList,
-        'topRatedProjectsList':topRatedProjectsList,
+        'categories': categories,
+        'featuredProjectsList': featuredProjectsList,
+        'topRatedProjectsList': topRatedProjectsList,
     }
     return render(request, "home.html", context)
+
 
 # --------------------------------- List of Project in Category Page -----------------------------------------
 
 def project_list(request, id):
     project_list = []
     category = Categories.objects.get(category_id=id)
-    category_name=category.category_name
+    category_name = category.category_name
     category_projects = Project.objects.filter(category_id=id).values('project_id')
     for project in category_projects:
-          project_list.append(Images.objects.filter(project_id=project['project_id']))
-    
-    context = {'project_list': project_list ,
-               'category_name' :category_name
-    }
-    print(project_list)
-    return render(request, 'list_projects.html',context )
+        project_list.append(Images.objects.filter(project_id=project['project_id']))
 
+    context = {'project_list': project_list,
+               'category_name': category_name
+               }
+    print(project_list)
+    return render(request, 'list_projects.html', context)
 
 
 def project_info(request, id):
@@ -123,14 +124,14 @@ def project_info(request, id):
     print(project_list)
 
     for i in rate:
-            sum += i.rate
-            count += 1
+        sum += i.rate
+        count += 1
 
     context['project'] = project_data
     context['category'] = category_data
     context['images'] = images
     context['tags'] = tags
-    context['sum'] = sum/count
+    context['sum'] = sum / count
     context['donation'] = donation
     context['project_list']=project_list
     percentage = (donation[0].donation_value/project_data.total_target)*100
@@ -142,10 +143,10 @@ def project_info(request, id):
         if not donation:
             Donation.objects.create(project_id=project_data, donation_value=request.POST['value'])
         else:
-            Donation.objects.filter(project_id=project_data).update(donation_value=F("donation_value") + request.POST["value"])
+            Donation.objects.filter(project_id=project_data).update(
+                donation_value=F("donation_value") + request.POST["value"])
 
         return render(request, 'project/hi.html')
-
 
     return render(request, 'project/project_info.html', context)
 
@@ -162,9 +163,7 @@ def add_comment(request, id):
     elif request.method == "POST":
         Comment.objects.create(project_id=project, comment=request.POST['comment'])
 
-        return render(request, 'project/hi.html',context)
-
-
+        return render(request, 'project/hi.html', context)
 
 
 def cancel_project(request, id):
@@ -186,9 +185,7 @@ def report_project(request, id):
         project = Project.objects.get(project_id=id)
         ProjectReports.objects.create(project_id_id=project.project_id, message='this project')
 
-        return render(request,'project/hi.html')
-
-
+        return render(request, 'project/hi.html')
 
 
 def report_comment(request, id):
@@ -225,7 +222,7 @@ def report_comment(request, id):
 # --------------------------------- Search Function-----------------------------------------
 # we use Q objects to make more complex queries following
 # Use | (OR) operator to search for only one field. For example, when searching title | content, both don’t have to be true, only one is okay, when searching for a word such as “python”, so it(python) doesn’t have to be contained in both title and content fields
-#https://stackpython.medium.com/django-search-with-q-objects-tutorial-9c701db74e0e
+# https://stackpython.medium.com/django-search-with-q-objects-tutorial-9c701db74e0e
 def search(request):
     project_list = []
     if request.method == 'POST':
@@ -235,15 +232,10 @@ def search(request):
             results = Project.objects.filter(search).values('project_id')
             for project in results:
                 project_list.append(Images.objects.filter(project_id=project['project_id']))
-            
+
             return render(request, 'search_project.html', {'project_list': project_list})
 
         else:
             return render(request, 'search_project.html')
     else:
         return render(request, 'home.html')
-
-
-
-
-
