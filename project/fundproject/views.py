@@ -131,10 +131,11 @@ def project_info(request, id):
     context['category'] = category_data
     context['images'] = images
     context['tags'] = tags
-    context['sum'] = sum / count
+    context['sum'] = sum
+    context['count'] = count
     context['donation'] = donation
     context['project_list']=project_list
-    percentage = (donation[0].donation_value/project_data.total_target)*100
+    # percentage = (donation[0].donation_value/project_data.total_target)*100
 
 
     if request.method == 'GET':

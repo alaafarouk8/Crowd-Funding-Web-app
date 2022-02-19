@@ -14,7 +14,9 @@
             <p>{{project.start_date}}</p>
             <p>{{project.end_date}}</p>
             <p>{{category.category_name}}</p>
-            <p>{{sum}}</p>
+            {% if count > 0 %}
+            <p>{{sum|div:count}}</p>
+            {%endif%}
             <p>{{donation.0.donation_value}}</p>
             <form method="post">
                 {%csrf_token%}
