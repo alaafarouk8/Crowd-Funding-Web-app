@@ -29,7 +29,7 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+  <nav class="navbar navbar-expand-lg navbar-light  sticky-top" style="background-color: white;">
     <div class="container-fluid">
       <a class="navbar-brand" href="{%url 'home'%}">Crowd Funding </a>
 
@@ -37,13 +37,13 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           {%if request.user.is_authenticated%}
           <li class="nav-item">
-            <a class="nav-link" href="{%url 'users:logout'%}">Logout</a>
+            <a class="nav-link text-dark " href="{%url 'users:logout'%}">Logout</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{%url 'create_project'%}">Project</a>
+            <a class="nav-link text-dark" href="{%url 'create_project'%}">Project</a>
           </li>
             <li class="nav-item">
-              <a class="nav-link" href="{%url 'users:userprofile'%}">Profile</a>
+              <a class="nav-link text-dark" href="{%url 'users:userprofile'%}">Profile</a>
             </li>
           {%else%}
           <li class="nav-item">
