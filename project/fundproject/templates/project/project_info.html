@@ -9,15 +9,15 @@
         </div>
         <div class="col-lg-6 col-md-12">
             <h1>{{project.title}}</h1>
-            <p>{{project.details}}</p>
-            <p> {{project.total_target}}</p>
-            <p>{{project.start_date}}</p>
-            <p>{{project.end_date}}</p>
-            <p>{{category.category_name}}</p>
+            <p>Details: {{project.details}}</p>
+            <p>Total target: {{project.total_target}}</p>
+            <p>Start date: {{project.start_date}}</p>
+            <p>End date: {{project.end_date}}</p>
+            <p>Category {{category.category_name}}</p>
             {% if count > 0 %}
-            <p>{{sum|div:count}}</p>
+            <p>Rate {{sum|div:count}}</p>
             {%endif%}
-            <p>{{donation.0.donation_value}}</p>
+            <p>Donations: {{donation.0.donation_value}}</p>
             <form method="post">
                 {%csrf_token%}
                 <input type="number" name="value"/>
