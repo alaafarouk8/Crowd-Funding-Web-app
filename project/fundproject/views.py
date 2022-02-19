@@ -8,9 +8,11 @@ from .models import *
 from django.db.models import Sum, Count, F
 from users.models import Users
 from django.db.models import Q, Max, Min
+from django.contrib.auth.decorators import login_required
 
 
 #######################################
+@login_required(login_url='/login')
 # create project
 def create_project(request):
     context = {}
@@ -42,6 +44,7 @@ def create_project(request):
 
 #######################################
 # List Projects
+@login_required(login_url='/login')
 def list_project(request):
     project_list = []
     rate_list = []
@@ -86,6 +89,7 @@ def home(request):
 
 
 # --------------------------------- List of Project in Category Page -----------------------------------------
+@login_required(login_url='/login')
 
 def project_list(request, id):
     project_list = []
@@ -101,7 +105,7 @@ def project_list(request, id):
     print(project_list)
     return render(request, 'list_projects.html', context)
 
-
+@login_required(login_url='/login')
 def project_info(request, id):
     context = {}
     project_data = Project.objects.get(project_id=id)
@@ -157,6 +161,7 @@ def project_info(request, id):
 
     return render(request, 'project/project_info.html', context)
 
+@login_required(login_url='/login')
 
 def add_comment(request, id):
     project = Project.objects.get(project_id=id)
@@ -175,6 +180,7 @@ def add_comment(request, id):
 
         return render(request, 'project/add_comment.html', context)
 
+@login_required(login_url='/login')
 
 def cancel_project(request, id):
     if request.method == 'GET':
@@ -185,6 +191,7 @@ def cancel_project(request, id):
         Project.objects.filter(project_id=project.project_id).delete()
 
         return HttpResponseRedirect('/project/project_list')
+@login_required(login_url='/login')
 
 
 def report_project(request, id):
@@ -200,6 +207,7 @@ def report_project(request, id):
 
     return redirect(f'/project/project_info/{project.project_id}')
 
+@login_required(login_url='/login')
 
 def report_comment(request, id):
     comments = Comment.objects.filter(comment_id=id)
