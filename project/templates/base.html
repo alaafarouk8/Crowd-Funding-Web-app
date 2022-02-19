@@ -35,30 +35,28 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          {%if request.session.username%}
+          {%if request.user.is_authenticated%}
           <li class="nav-item">
-            <a class="nav-link" href="">Logout</a>
+            <a class="nav-link" href="{%url 'users:logout'%}">Logout</a>
           </li>
-          
-          {%else%}
-          <li class="nav-item">
-            <a class="nav-link" href="users/register">Register</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">Log In</a>
-          </li>
-          {%endif%}
           <li class="nav-item">
             <a class="nav-link" href="{%url 'create_project'%}">Project</a>
           </li>
             <li class="nav-item">
-              <a class="nav-link" href="">Profile</a>
+              <a class="nav-link" href="{%url 'users:userprofile'%}">Profile</a>
             </li>
-
+          {%else%}
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'users:register'%}">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'users:login'%}">Log In</a>
+          </li>
+          {%endif%}
           </div>
         </ul>
 
-        <form class="d-flex" action="project/search/" method="POST">
+        <form class="d-flex" action="{%url 'search'%}" method="POST">
           {% csrf_token %}
           <input class="form-control" type="text" name="query" placeholder="Search" required/>
           <input type="submit" class="btn btn-dark" name="Search" />

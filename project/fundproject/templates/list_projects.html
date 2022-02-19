@@ -6,9 +6,10 @@ Crowd Funding
 {% endblock %}
 
 {%block content%}
-<div class="container bg-light" style="border-radius: 40px;">
+<div class="container bg-light text-center" style="border-radius: 40px;">
     <h1 class="mt-2 text-center">List of Projects in <span class="text-success">{{category_name}}</span></h1>
     <div class="row">
+        {% if project_list %}
         {% for project in project_list %}
         <div class="card col-md-4" style="border-radius:20px ; padding: 5px; margin: 5px;">
             {% if project.0.img %}
@@ -31,6 +32,9 @@ Crowd Funding
 
         </div>
         {%endfor%}
+        {%else %}
+        <h2>there is no project in this category 😞</h2>
+        {% endif %}
     </div>
 
 </div>
