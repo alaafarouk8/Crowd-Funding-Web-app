@@ -144,11 +144,14 @@ def user_login(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
+                    print(user)
+                    request.session['usernew']=user.first_name
                     return render(request, "users/index.html")
             # else:
             #     messages.info(request,'invalid login data...')
     else:
         form = LoginForm()
+
     return render(request, 'users/new-login.html', {'form': form})
 
 
@@ -162,6 +165,7 @@ def index(request):
 
 # # #####
 def logout_view(request):
+    request.session.clear()
     logout(request)
     return redirect('/login')
 

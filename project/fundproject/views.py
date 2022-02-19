@@ -3,11 +3,11 @@ from multiprocessing import context
 from queue import Empty
 from unicodedata import category
 from django.core.files.storage import FileSystemStorage
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect, HttpResponse,HttpResponseRedirect
 from .models import *
 from django.db.models import Sum, Count, F
 from users.models import Users
-from django.db.models import Q  
+from django.db.models import Q , Max , Min
 
 
 #######################################
@@ -47,7 +47,6 @@ def list_project(request):
     rate_list =[]
     projects = Project.objects.all()
 
-    print("AHMED ASHRAF")
     for project in projects:
         project_list.append(Images.objects.filter(project_id=project.project_id))
         rate_list.append(Rate.objects.filter(project_id=project.project_id))
@@ -62,19 +61,27 @@ def home(request):
    
     latestProjects = Project.objects.values('project_id').order_by('start_date')[0:5]
     FeaturedProjects = Project.objects.values('project_id')[0:5]
+    topratedProjects = Rate.objects.values('project_id').annotate(rate=Max('rate')).order_by('-rate')[0:5]
+
     latestProjectsList = []
+
     for project in latestProjects:
         latestProjectsList.append(Images.objects.filter(project_id=project['project_id']))
     featuredProjectsList = []
+
     for project in FeaturedProjects:
         featuredProjectsList.append(Images.objects.filter(project_id=project['project_id']))
+    topRatedProjectsList = []
 
-    print(latestProjectsList)
+    for project in topratedProjects:
+        topRatedProjectsList.append(Images.objects.filter(project_id=project['project_id']))
+    print(topRatedProjectsList)
     categories = Categories.objects.all()
     context = {
         'latestProjectsList': latestProjectsList,
         'categories' :categories , 
         'featuredProjectsList':featuredProjectsList,
+        'topRatedProjectsList':topRatedProjectsList,
     }
     return render(request, "home.html", context)
 
@@ -112,11 +119,11 @@ def project_info(request, id):
 
     context['project'] = project_data
     context['category'] = category_data
-    context['images'] = images[0]
+    context['images'] = images
     context['tags'] = tags
     context['sum'] = sum/count
     context['donation'] = donation
-
+    percentage = (donation[0].donation_value/project_data.total_target)*100
 
 
     if request.method == 'GET':
@@ -135,17 +142,61 @@ def project_info(request, id):
 
 def add_comment(request, id):
     project = Project.objects.get(project_id=id)
+    comments = Comment.objects.filter(project_id=project.project_id)
     context = {}
     context['project'] = project
-    print(project)
+    context['comments'] = comments
     if request.method == "GET":
         return render(request, 'project/hi.html', context)
 
-    if request.method == "POST":
-        project = Project.objects.get(project_id=id)
-        comment = Comment.objects.filter(project_id=id)
+    elif request.method == "POST":
         Comment.objects.create(project_id=project, comment=request.POST['comment'])
-        return render(request, 'project/hi.html')
+
+        return render(request, 'project/hi.html',context)
+
+
+
+
+def cancel_project(request, id):
+    if request.method == 'GET':
+        return render(request, 'project/cancel.html')
+
+    if request.method == 'POST':
+        project = Project.objects.get(project_id=id)
+        Project.objects.filter(project_id=project.project_id).delete()
+
+        return HttpResponseRedirect('/project/project_list')
+
+
+def report_project(request, id):
+    if request.method == 'GET':
+        return render(request, 'project/report_project.html')
+
+    elif request.method == 'POST':
+        project = Project.objects.get(project_id=id)
+        ProjectReports.objects.create(project_id_id=project.project_id, message='this project')
+
+        return render(request,'project/hi.html')
+
+
+
+
+def report_comment(request, id):
+    if request.method == 'GET':
+        return render(request, 'project/report_comment.html')
+    if request.method == 'POST':
+        project = Project.objects.get(project_id=id)
+        comments = Comment.objects.filter(project_id=project.project_id)
+        context = {}
+        context['project'] = project
+        context['comments'] = comments
+        comment = Comment.objects.get(comment_id=id)
+        CommentReports.objects.create(comment_id_id=comment.comment_id)
+        return render(request,'project/hi.html' , context)
+
+
+
+
 
 
 
@@ -169,5 +220,8 @@ def search(request):
             return render(request, 'search_project.html')
     else:
         return render(request, 'home.html')
+
+
+
 
 
