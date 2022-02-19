@@ -114,6 +114,15 @@ def project_info(request, id):
     donation = Donation.objects.filter(project_id=project_data.project_id)
     sum = 0
     count = 0
+    counter = 0
+    project_list = []
+    projects = Project.objects.all()
+
+    for project in projects:
+        project_list.append(Images.objects.filter(project_id=project.project_id))
+        # counter += 1
+    print(project_list)
+
     for i in rate:
         sum += i.rate
         count += 1
@@ -124,7 +133,9 @@ def project_info(request, id):
     context['tags'] = tags
     context['sum'] = sum / count
     context['donation'] = donation
-    percentage = (donation[0].donation_value / project_data.total_target) * 100
+    context['project_list']=project_list
+    percentage = (donation[0].donation_value/project_data.total_target)*100
+
 
     if request.method == 'GET':
         return render(request, 'project/project_info.html', context)
@@ -188,7 +199,24 @@ def report_comment(request, id):
         context['comments'] = comments
         comment = Comment.objects.get(comment_id=id)
         CommentReports.objects.create(comment_id_id=comment.comment_id)
-        return render(request, 'project/hi.html', context)
+        return render(request,'project/hi.html' , context)
+
+# def image_slider(request):
+#     project_list = []
+#     rate_list =[]
+#     projects = Project.objects.all()
+#
+#     for project in projects:
+#         project_list.append(Images.objects.filter(project_id=project.project_id))
+#         rate_list.append(Rate.objects.filter(project_id=project.project_id))
+#
+#     context = {'project_list': project_list,
+#                }
+#     print(project_list)
+#     return render(request, 'project/project_info.html', context)
+
+
+
 
 
 # --------------------------------- Search Function-----------------------------------------
