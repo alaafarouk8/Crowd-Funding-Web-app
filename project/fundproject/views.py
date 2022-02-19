@@ -181,7 +181,18 @@ def report_project(request, id):
 
 
 
-
+def report_comment(request, id):
+    if request.method == 'GET':
+        return render(request, 'project/report_comment.html')
+    if request.method == 'POST':
+        project = Project.objects.get(project_id=id)
+        comments = Comment.objects.filter(project_id=project.project_id)
+        context = {}
+        context['project'] = project
+        context['comments'] = comments
+        comment = Comment.objects.get(comment_id=id)
+        CommentReports.objects.create(comment_id_id=comment.comment_id)
+        return render(request,'project/hi.html' , context)
 
 
 
