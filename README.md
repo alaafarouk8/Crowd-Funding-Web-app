@@ -17,4 +17,8 @@ Crowdfunding is the practice of funding a project or venture by raising small am
 - psql -h localhost -U funduser fund
 - djangorestframework-3.13.1
 
+#API links:
+projrcts: http://127.0.0.1:8000/fundapiprojectListView/
+users: http://127.0.0.1:8000/usersusersListView/
+
 
