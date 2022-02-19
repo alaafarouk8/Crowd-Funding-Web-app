@@ -168,12 +168,12 @@ def add_comment(request, id):
     context['comments'] = comments
     context['user'] = user
     if request.method == "GET":
-        return render(request, 'project/hi.html', context)
+        return render(request, 'project/add_comment.html', context)
 
     elif request.method == "POST":
         Comment.objects.create(project_id=project, comment=request.POST['comment'], user_id_id=request.session.get('id'))
 
-        return render(request, 'project/hi.html', context)
+        return render(request, 'project/add_comment.html', context)
 
 
 def cancel_project(request, id):
@@ -214,7 +214,7 @@ def report_comment(request, id):
         context['comments'] = comments
         comment = Comment.objects.get(comment_id=id)
         CommentReports.objects.create(comment_id_id=comment.comment_id, user_id_id=request.session.get('id'))
-        # return render(request,'project/hi.html', context)
+        # return render(request,'project/add_comment.html', context)
         return redirect(f'/project/comments/{project[0].project_id.project_id}')
 # def image_slider(request):
 #     project_list = []
