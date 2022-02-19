@@ -14,31 +14,31 @@ Crowd Funding
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="projecttitleID">Project Title</label>
-                <input type="text" class="form-control" id="projecttitleID" placeholder="1234 Main St" name="project_title">
+                <input type="text" class="form-control" id="projecttitleID" placeholder="1234 Main St" name="project_title" required>
             </div>
 
             <div class="form-group col-md-6">
                 <label for="ProjectImagesID">Project Images</label>
-                <input type="file" class="form-control" id="ProjectImagesID" multiple name="projectimage[]">
+                <input type="file" class="form-control" id="ProjectImagesID" multiple name="projectimage[]" required>
             </div>
         </div>
         <div class="form-group">
             <label for="projectdetailsID">Project details</label>
             <textarea class="form-control" id="projectdetailsID" placeholder="1234 Main St"
-                name="projectdetails"></textarea>
+                name="projectdetails" required></textarea>
         </div>
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label for="totaltargetID">Total Target</label>
-                <input type="text" class="form-control" id="totaltargetID" name="totaltarget">
+                <input type="text" class="form-control" id="totaltargetID" name="totaltarget" required>
             </div>
             <div class="form-group col-md-4">
                 <label for="TagsID">Tags</label>
-                <input type="text" class="form-control" id="TagsID" name="tags">
+                <input type="text" class="form-control" id="TagsID" name="tags"required>
             </div>
             <div class="form-group col-md-4">
                 <label for="categoryID">Category</label>
-                <select id="categoryID" class="form-control" name="category">
+                <select id="categoryID" class="form-control" name="category" required>
                     {%for cat in catg%}
                     <option value="{{cat.category_name}}">{{cat.category_name}}</option>
                     {%endfor%}
@@ -48,11 +48,11 @@ Crowd Funding
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="startdateID">Start Date</label>
-                <input type="date" class="form-control" id="startdateID" name="startdate">
+                <input type="date" class="form-control" id="startdateID" name="startdate" required>
             </div>
             <div class="form-group col-md-6">
                 <label for="enddateID">End Date</label>
-                <input type="date" class="form-control" id="enddateID" name="enddate">
+                <input type="date" class="form-control" id="enddateID" name="enddate" required>
             </div>
         </div>
 
