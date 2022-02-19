@@ -40,18 +40,20 @@
 
         </div>
         <div class="col-lg-12 " style="margin-bottom:200px">
-            <h1>{{project.title}}</h1>
-            <p>Details: {{project.details}}</p>
-            <p>Total target: {{project.total_target}}</p>
-            <p>Start date: {{project.start_date}}</p>
-            <p>End date: {{project.end_date}}</p>
-            <p>Category {{category.category_name}}</p>
+            <h1><b>{{project.title}}</b></h1>
+            <p><b>Details</b>: {{project.details}}</p>
+            <p><b>Total target:</b> {{project.total_target}}</p>
+            <p><b>Start date:</b> {{project.start_date}}</p>
+            <p><b>End date:</b> {{project.end_date}}</p>
+            <p><b>Category:</b> {{category.category_name}}</p>
             {% if count > 0 %}
-            <p>Rate {{sum|div:count}}</p>
+            <p><b>Rate:</b> {{sum|div:count}}⭐</p>
             {%endif%}
-            <p>Donations: {{donation.0.donation_value}}</p>
-            <p>{%for tag in tags%}
-                tags: {{tag.tag_name}}
+            <p><b>Donations:</b> {{donation.0.donation_value}}</p>
+            <p><b>tags:</b> {%for tag in tags%}
+                <span class="badge bg-dark">
+                {{tag.tag_name}}
+                </span>
                 {%endfor%}
             </p>
             <form method="post">
