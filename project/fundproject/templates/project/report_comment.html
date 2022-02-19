@@ -5,7 +5,7 @@
         Are you sure
     </div>
     <form method="post">
-
+       {% csrf_token %}
       <input type="submit" class="btn btn-dark">
     </form>
 {%endblock%}

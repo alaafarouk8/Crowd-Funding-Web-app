@@ -12,6 +12,9 @@
          <div class="card text-white bg-dark" style="margin-top:30px">
         <div class="card-body">
         <h5 class="card-title">{{comment.comment}}</h5>
+        <form method="post" action="{% url 'report_comment' comment.comment_id %}">
+            <input class="btn btn-danger" value="report" type="submit"/>
+        </form>
          </div>
         </div>
         {%endfor%}
