@@ -15,8 +15,20 @@
     <a href="{%url 'users:logout' %}" class="w3-bar-item w3-button">Log out</a> <br> <br>
 </div>
 <div class="container" style="margin-left:20%">
-
     <br>
-Hello from ay 7aga
+    <h2> Hy! {{request.user.username}}</h2>
+    <br>
+    <div class="container">
+        {% if donations.count == 0 %}
+        <div style="color:red"> Unfortunately, you don't have any donation</div>
+        {% else %}
+        {%for donation in donations %}
+        <span style="color:green; font-weight: bold; ">Number: </span> {{ forloop.counter }} <br>
+        <span style="color:green; font-weight: bold; ">Donation Value:  </span> {{ donation.donation_value }} <br>
+        <span style="color:green; font-weight: bold; ">Project Title:  </span> {{ donation.project_id.title }}<br>
+        <br>
+        {% endfor %}
+        {% endif %}
     </div>
+</div>
 {% endblock %}

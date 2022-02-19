@@ -17,7 +17,7 @@ from rest_framework import permissions
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from fundproject.models import Project
+from fundproject.models import Project , Donation
 
 
 @api_view(['GET', 'DELETE', 'PUT'])
@@ -214,17 +214,22 @@ def editprofile(request):
 @login_required(login_url='/login')
 def userproject(request, id):
     user = Users.objects.get(id=id)
-    # projects = Project.objects.filter(
-    #     user=user)  # first user => forign key , second user is user which get by the previous line
-    # context = {
-    #     "user": user,
-    #     "projects": projects
-    # }
+    projects = Project.objects.filter(
+        user_id=user)  # first user => forign key , second user is user which get by the previous line
+    context = {
+        "user": user,
+        "projects": projects
+    }
 
-    return render(request, "users/userproject.html")
+    return render(request, "users/userproject.html" ,context)
 
 
 @login_required(login_url='/login')
 def userdonation(request , id):
      user = Users.objects.get(id=id)
-     return render(request, "users/userdonation.html")
+     donations = Donation.objects.filter(user_id = user)
+     context = {
+         "user": user,
+         "donations": donations
+     }
+     return render(request, "users/userdonation.html" , context)
