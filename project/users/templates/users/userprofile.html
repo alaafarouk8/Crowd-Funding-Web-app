@@ -17,12 +17,12 @@
     <a href="{%url 'users:userdonation' user.id %}" class="w3-bar-item w3-button">Donations</a> <br> <br>
     <a href="{%url 'users:logout' %}" class="w3-bar-item w3-button">Log out</a> <br> <br>
 </div>
-<div class="card mb-4 border-0" style="margin-left:20%">
+<div class="card mb-4 border-0" style="margin-left:20% ;">
     <br/>
     <br/>
-    <img class="img-radius profile-image" src="{{request.user.photo.url}}" alt="Card image cap">
+    <img class="img-radius profile-image" src="{{request.user.photo.url}}" alt="Card image cap" style="width:100%; max-width: 300px;height: 100%;max-height: 300px;">
     <div class="card-body">
-        <h5 class="card-title username">{{request.user.username}}</h5>
+        <h5 class="card-title username" style="font-size: 2em; color: #72B01D;">{{request.user.username}}</h5>
         <p class="card-text"><span class="data">First Name: </span><span>{{request.user.first_name}}</span></p>
         <p class="card-text"><span class="data">Last Name: </span><span>{{request.user.last_name}}</span></p>
         <p class="card-text"><span class="data">Email: </span><span>{{request.user.email}}</span></p>

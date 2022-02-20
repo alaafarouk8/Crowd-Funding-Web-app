@@ -3,7 +3,7 @@ from multiprocessing import context
 from queue import Empty
 from unicodedata import category
 from django.core.files.storage import FileSystemStorage
-from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect,reverse
+from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect, reverse
 from .models import *
 from django.db.models import Sum, Count, F
 from users.models import Users
@@ -15,31 +15,37 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='/login')
 # create project
 def create_project(request):
-    context = {}
-    if request.method == 'GET':
-        categories = Categories.objects.all()
-        context['catg'] = categories
-        return render(request, 'project/create_project.html', context)
-    elif request.method == 'POST':
-        project_title = request.POST['project_title']
-        project_details = request.POST['projectdetails']
-        total_target = request.POST['totaltarget']
-        category = Categories.objects.get(category_name=request.POST['category'])
-        project_Start_date = request.POST['startdate']
-        project_End_date = request.POST['enddate']
-        images = request.FILES.getlist('projectimage[]')
+    user = request.session.get('id')
+    if user:
+        context = {}
+        if request.method == 'GET':
+            categories = Categories.objects.all()
+            context['catg'] = categories
+            return render(request, 'project/create_project.html', context)
+        elif request.method == 'POST':
+            project_title = request.POST['project_title']
+            project_details = request.POST['projectdetails']
+            total_target = request.POST['totaltarget']
+            category = Categories.objects.get(category_name=request.POST['category'])
+            project_Start_date = request.POST['startdate']
+            project_End_date = request.POST['enddate']
+            images = request.FILES.getlist('projectimage[]')
 
-        project = Project.objects.create(title=project_title, details=project_details, total_target=total_target,start_date=project_Start_date, end_date=project_End_date, category_id=category,user_id_id=request.session.get('id'))
+            project = Project.objects.create(title=project_title, details=project_details, total_target=total_target,
+                                             start_date=project_Start_date, end_date=project_End_date, category_id=category,
+                                             user_id_id=request.session.get('id'))
 
-        if images:
-            for i in images:
-                image = Images(img=i, project_id=project)
-                image.save()
+            if images:
+                for i in images:
+                    image = Images(img=i, project_id=project)
+                    image.save()
 
-        for tag in request.POST["tags"].split(","):
-            Tags(project_id=project, tag_name=tag).save()
-        return redirect('list_project')
-        #return render(request, 'project/project_list.html', context)
+            for tag in request.POST["tags"].split(","):
+                Tags(project_id=project, tag_name=tag).save()
+            return redirect('list_project')
+    else:
+        return redirect(f'/login')
+        # return render(request, 'project/project_list.html', context)
 
 
 #######################################
@@ -90,7 +96,6 @@ def home(request):
 
 # --------------------------------- List of Project in Category Page -----------------------------------------
 @login_required(login_url='/login')
-
 def project_list(request, id):
     project_list = []
     category = Categories.objects.get(category_id=id)
@@ -104,6 +109,7 @@ def project_list(request, id):
                }
     print(project_list)
     return render(request, 'list_projects.html', context)
+
 
 @login_required(login_url='/login')
 def project_info(request, id):
@@ -140,29 +146,28 @@ def project_info(request, id):
     context['project_list'] = project_list
 
     # percentage = (donation[0].donation_value/project_data.total_target)*100
-
-
-    if request.method == 'GET':
-        return render(request, 'project/project_info.html', context)
-    elif request.method == 'POST':
-        if not donation:
-            Donation.objects.create(project_id=project_data, donation_value=request.POST['value'], user_id_id=request.session.get('id'))
+    user = request.session.get('id')
+    if user:
+        if request.method == 'GET':
             return render(request, 'project/project_info.html', context)
+        elif request.method == 'POST':
+            if not donation:
+                Donation.objects.create(project_id=project_data, donation_value=request.POST['value'],
+                                        user_id_id=request.session.get('id'))
+                return render(request, 'project/project_info.html', context)
 
-        else:
-            Donation.objects.filter(project_id=project_data, user_id_id=request.session.get('id')).update(
-                donation_value=F("donation_value") + request.POST.get("value"))
+            else:
+                Donation.objects.filter(project_id=project_data, user_id_id=request.session.get('id')).update(
+                    donation_value=F("donation_value") + request.POST.get("value"))
 
-        return redirect(f'/project/project_info/{project_data.project_id}')
+            return redirect(f'/project/project_info/{project_data.project_id}')
 
+        return render(request, 'project/project_info.html', context)
+    else:
+        return redirect(f'/login')
 
-
-
-
-    return render(request, 'project/project_info.html', context)
 
 @login_required(login_url='/login')
-
 def add_comment(request, id):
     project = Project.objects.get(project_id=id)
     comments = Comment.objects.filter(project_id=project.project_id)
@@ -176,12 +181,13 @@ def add_comment(request, id):
         return render(request, 'project/add_comment.html', context)
 
     elif request.method == "POST":
-        Comment.objects.create(project_id=project, comment=request.POST['comment'], user_id_id=request.session.get('id'))
+        Comment.objects.create(project_id=project, comment=request.POST['comment'],
+                               user_id_id=request.session.get('id'))
 
         return render(request, 'project/add_comment.html', context)
 
-@login_required(login_url='/login')
 
+@login_required(login_url='/login')
 def cancel_project(request, id):
     if request.method == 'GET':
         return render(request, 'project/cancel.html')
@@ -191,11 +197,11 @@ def cancel_project(request, id):
         Project.objects.filter(project_id=project.project_id).delete()
 
         return HttpResponseRedirect('/project/project_list')
+
+
 @login_required(login_url='/login')
-
-
 def report_project(request, id):
-    context={}
+    context = {}
     context['id'] = id
     project = Project.objects.get(project_id=id)
 
@@ -203,12 +209,13 @@ def report_project(request, id):
         return render(request, 'project/report_project.html', context)
 
     elif request.method == 'POST':
-        ProjectReports.objects.create(project_id_id=project.project_id, message='this project', user_id_id=request.session.get('id'))
+        ProjectReports.objects.create(project_id_id=project.project_id, message='this project',
+                                      user_id_id=request.session.get('id'))
 
     return redirect(f'/project/project_info/{project.project_id}')
 
-@login_required(login_url='/login')
 
+@login_required(login_url='/login')
 def report_comment(request, id):
     comments = Comment.objects.filter(comment_id=id)
     project = Comment.objects.filter(project_id=comments[0].project_id)
@@ -224,22 +231,33 @@ def report_comment(request, id):
         CommentReports.objects.create(comment_id_id=comment.comment_id, user_id_id=request.session.get('id'))
         # return render(request,'project/add_comment.html', context)
         return redirect(f'/project/comments/{project[0].project_id.project_id}')
-# def image_slider(request):
-#     project_list = []
-#     rate_list =[]
-#     projects = Project.objects.all()
-#
-#     for project in projects:
-#         project_list.append(Images.objects.filter(project_id=project.project_id))
-#         rate_list.append(Rate.objects.filter(project_id=project.project_id))
-#
-#     context = {'project_list': project_list,
-#                }
-#     print(project_list)
-#     return render(request, 'project/project_info.html', context)
+    
+    
+def add_rate(request, id):
+    project = Project.objects.get(project_id=id)
+    rate = Rate.objects.filter(project_id=project.project_id)
+    user = request.session.get('id')
 
+    context = {}
+    context['project'] = project
+    context['rate'] = rate
+    context['user'] = user
+    user_rate = Rate.objects.filter(user_id = user,project_id = project.project_id)
+    print(user_rate)
+    if request.method == "GET":
+        print(project)
+        return render(request, 'project/add.rate.html', context)
 
+    elif request.method == "POST":
+        if not user_rate:
+            Rate.objects.create(project_id=project, rate=request.POST['rate'],
+                                user_id_id=request.session.get('id'))
+            
 
+            return redirect(f'/project/project_info/{project.project_id}')
+        else:
+            context['error_msg'] = "You have rated this project before"
+            return render(request, 'project/add.rate.html', context)
 
 
 # --------------------------------- Search Function-----------------------------------------
@@ -253,6 +271,7 @@ def search(request):
         if query is not None:
             search = Q(title__icontains=query) | Q(tags__tag_name__icontains=query)
             results = Project.objects.filter(search).values('project_id')
+            print(results)
             for project in results:
                 project_list.append(Images.objects.filter(project_id=project['project_id']))
 

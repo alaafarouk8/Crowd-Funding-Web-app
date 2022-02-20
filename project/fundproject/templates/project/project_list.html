@@ -10,11 +10,11 @@ Crowd Funding
     <div class="row">
         <h1 class="text-center">Projects</h1>
         {% for project in project_list %}
-        <div class="card col-lg-3" style="border-radius:20px ; padding: 5px; margin-right: auto; margin-left: auto; margin-top: 20px;">
+        <div class="card col-lg-3" style="border-radius:20px ; padding: 5px; margin: 5px; margin-right: auto; margin-left: auto; margin-top: 20px;">
             {% if project.0.img %}
             {% load static %}
             <a href="{% url 'project_info' project.0.project_id.project_id %}">
-            <img class="card-img-top w-100" height="200" src="{{project.0.img.url}}" alt="Card image">
+            <img class="card-img-top w-100" height="200" src="{{project.0.img.url}}" alt="Card image" style="border-radius: 15px;">
             </a>
           {% else %}
           <img class="card-img-top w-100" height="200" src="" alt="Not Found ">

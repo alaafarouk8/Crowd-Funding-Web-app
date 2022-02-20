@@ -13,10 +13,15 @@ Crowd Funding
             {% if project_list %}
             {% for project in project_list %}
 
-            <div class="card col-md-4" style="border-radius:20px ; padding: 5px; margin: 5px; margin-top: 30px;">
+            <div class="card col-md-3"
+                style="border-radius:20px ; padding: 5px; margin: 5px; margin-top: 30px; margin-left: auto;margin-right: auto;">
                 {% if project.0.img %}
                 {% load static %}
-                <img class="card-img-top w-100" height="200" src="{{project.0.img.url}}" alt="Card image">
+                <a href="/project/project_info/{{project.0.project_id.project_id}}" target="_blank"
+                    style="text-decoration:none;">
+                    <img class="card-img-top w-100" height="200" src="{{project.0.img.url}}" alt="Card image"
+                        style="border-radius: 15px;">
+                </a>
                 {% else %}
                 <img class="card-img-top w-100" height="200" src="" alt="Not Found ">
                 {% endif %}
