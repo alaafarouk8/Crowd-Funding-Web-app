@@ -1,10 +1,12 @@
 {%extends 'base.html'%}
 {%block content%}
+<div class="container text-center" style="justify-content: center;margin-top: 20px;">
 <form method="post">
     {% csrf_token %}
-    <input type="text" name="comment"/>
-    <input type="submit" value="add comment"/>
+    <input type="text" name="comment" style="padding: 10px; border-radius: 10px;width: 350px;"/>
+    <input type="submit" value="Add Comment" style="background-color:#72B01D; border-radius:10px; text-decoration: none; color: #000; font-weight: 600; margin-top: 30px; padding: 10px; border: none;" id="createProjectbtnID"/>
 </form>
+</div>
 <div class="container">
     <div class="row">
 

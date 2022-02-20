@@ -233,7 +233,7 @@ def report_comment(request, id):
         # return render(request,'project/add_comment.html', context)
         return redirect(f'/project/comments/{project[0].project_id.project_id}')
     
-    
+@login_required(login_url='/login')
 def add_rate(request, id):
     project = Project.objects.get(project_id=id)
     rate = Rate.objects.filter(project_id=project.project_id)
@@ -270,8 +270,8 @@ def search(request):
     if request.method == 'POST':
         query = request.POST.get('query')
         if query is not None:
-            search = Q(title__icontains=query) | Q(tags__tag_name__icontains=query)
-            results = Project.objects.filter(search).values('project_id')
+            projects = Q(title__icontains=query) | Q(tags__tag_name__icontains=query)
+            results = Project.objects.filter(projects).values('project_id').distinct()
             print(results)
             for project in results:
                 project_list.append(Images.objects.filter(project_id=project['project_id']))
