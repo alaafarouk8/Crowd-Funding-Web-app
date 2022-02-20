@@ -25,7 +25,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('users.urls')),
     path('project', include('fundproject.urls')),
+    path('fundapi', include('fundapi.urls')),
     url('^', include('django.contrib.auth.urls')),
+
 
 ]
 # if settings.DEBUG:

@@ -8,6 +8,7 @@ from .models import *
 from django.db.models import Sum, Count, F
 from users.models import Users
 from django.db.models import Q, Max, Min
+from django.shortcuts import get_object_or_404
 
 
 #######################################
@@ -152,6 +153,7 @@ def project_info(request, id):
 
 
 def add_comment(request, id):
+    # project = get_object_or_404(Project , project_id=id)
     project = Project.objects.get(project_id=id)
     comments = Comment.objects.filter(project_id=project.project_id)
     context = {}
@@ -161,9 +163,9 @@ def add_comment(request, id):
         return render(request, 'project/hi.html', context)
 
     elif request.method == "POST":
-        Comment.objects.create(project_id=project, comment=request.POST['comment'])
+        Comment.objects.create(project_id_id=project, comment=request.POST['comment'] )
 
-        return render(request, 'project/hi.html', context)
+    return render(request, 'project/hi.html', context)
 
 
 def cancel_project(request, id):
