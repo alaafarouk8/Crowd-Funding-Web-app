@@ -8,8 +8,8 @@ from .models import *
 from django.db.models import Sum, Count, F
 from users.models import Users
 from django.db.models import Q, Max, Min
+from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
-
 
 #######################################
 @login_required(login_url='/login')
@@ -169,6 +169,7 @@ def project_info(request, id):
 
 @login_required(login_url='/login')
 def add_comment(request, id):
+    # project = get_object_or_404(Project , project_id=id)
     project = Project.objects.get(project_id=id)
     comments = Comment.objects.filter(project_id=project.project_id)
     user = request.session.get('id')
