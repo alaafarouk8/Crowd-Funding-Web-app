@@ -1,11 +1,12 @@
 {%extends 'base.html'%}
 {%block content%}
-
-    <div>
-        Are you sure
+<div class="container text-center" style="margin-top:250px">
+    <div style="padding-bottom:20px">
+        Are you sure you want to report this Comment
     </div>
     <form method="post">
-       {% csrf_token %}
-      <input type="submit" class="btn btn-dark">
+        {%csrf_token%}
+      <input type="submit" class="btn btn-dark" value="Report">
     </form>
+    </div>
 {%endblock%}

@@ -20,10 +20,11 @@ from django.urls import path , include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import url
-
+from fundproject.views import home 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('users.urls')),
+    path('', home,name='home'),
     path('project', include('fundproject.urls')),
     path('fundapi', include('fundapi.urls')),
     url('^', include('django.contrib.auth.urls')),

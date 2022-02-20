@@ -29,39 +29,39 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+  <nav class="navbar navbar-expand-lg navbar-light  sticky-top" style="background-color: black;">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{%url 'home'%}">Crowd Funding </a>
+      <a class="navbar-brand text-light " href="{%url 'home'%}"><b> CROWD FUNDING </b></a>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          {%if request.session.username%}
+          {%if request.user.is_authenticated%}
           <li class="nav-item">
-            <a class="nav-link" href="">Logout</a>
-          </li>
-          
-          {%else%}
-          <li class="nav-item">
-            <a class="nav-link" href="users/register">Register</a>
+            <a class="nav-link text-light " href="{%url 'users:logout'%}">LOG OUT</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">Log In</a>
-          </li>
-          {%endif%}
-          <li class="nav-item">
-            <a class="nav-link" href="{%url 'create_project'%}">Project</a>
+            <a class="nav-link text-light" href="{%url 'list_project'%}">PROJECTS</a>
           </li>
             <li class="nav-item">
-              <a class="nav-link" href="">Profile</a>
+              <a class="nav-link text-light" href="{%url 'users:userprofile'%}">PROFILE</a>
             </li>
-
+          {%else%}
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{%url 'users:register'%}">REGISTER</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{%url 'users:login'%}">LOG IN</a>
+          </li>
+          {%endif%}
           </div>
         </ul>
 
-        <form class="d-flex" action="project/search/" method="POST">
+        <a class="nav-link btn" href="{%url 'create_project'%}" style="background-color:#72B01D; border-radius:10px; text-decoration: none; color: #000; font-weight: 600;">CREATE PROJECT</a>
+        <form class="d-flex" action="{%url 'search'%}" method="POST">
           {% csrf_token %}
-          <input class="form-control" type="text" name="query" placeholder="Search" required/>
-          <input type="submit" class="btn btn-dark" name="Search" />
+          <input class="form-control" type="text" name="query" placeholder="Search" style="margin-left: 10px;" required/>
+          <input type="submit" class="btn btn-outline-light" name="Search" style="margin-left: 10px;"/>
+          <!--  -->
         </form>
       </div>
     </div>
@@ -71,9 +71,9 @@
     <h1>HomePage</h1>
     {%endblock%}
   </div>
-  <footer class="text-center fixed-bottom text-white">
+  <footer class="text-center fixed-bottom text-white" style="margin-top: 100px; ">
 
-    <div class="text-center p-3 bg-dark">
+    <div class="text-center p-3 " style="background-color: #000;">
       © 2022 Copyright: Crowd Funding
     </div>
   </footer>
