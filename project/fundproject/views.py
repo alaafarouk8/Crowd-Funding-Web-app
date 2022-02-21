@@ -11,9 +11,9 @@ from django.db.models import Q, Max, Min
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 
-#######################################
+
 @login_required(login_url='/login')
-# create project
+# --------------------------------- Create project -----------------------------------------
 def create_project(request):
     user = request.session.get('id')
     if user:
@@ -48,8 +48,8 @@ def create_project(request):
         # return render(request, 'project/project_list.html', context)
 
 
-#######################################
-# List Projects
+
+# --------------------------------- List Project General-----------------------------------------
 @login_required(login_url='/login')
 def list_project(request):
     project_list = []
@@ -110,7 +110,7 @@ def project_list(request, id):
     print(project_list)
     return render(request, 'list_projects.html', context)
 
-
+# --------------------------------- Project info -----------------------------------------
 @login_required(login_url='/login')
 def project_info(request, id):
     context = {}
@@ -166,7 +166,7 @@ def project_info(request, id):
     else:
         return redirect(f'/login')
 
-
+# --------------------------------- Add Comment -----------------------------------------
 @login_required(login_url='/login')
 def add_comment(request, id):
     # project = get_object_or_404(Project , project_id=id)
@@ -187,7 +187,7 @@ def add_comment(request, id):
 
         return render(request, 'project/add_comment.html', context)
 
-
+# --------------------------------- Cancel project -----------------------------------------
 @login_required(login_url='/login')
 def cancel_project(request, id):
     if request.method == 'GET':
@@ -199,7 +199,7 @@ def cancel_project(request, id):
 
         return HttpResponseRedirect('/project/project_list')
 
-
+# --------------------------------- report project -----------------------------------------
 @login_required(login_url='/login')
 def report_project(request, id):
     context = {}
@@ -215,7 +215,7 @@ def report_project(request, id):
 
     return redirect(f'/project/project_info/{project.project_id}')
 
-
+# --------------------------------- report comment -----------------------------------------
 @login_required(login_url='/login')
 def report_comment(request, id):
     comments = Comment.objects.filter(comment_id=id)
@@ -233,6 +233,8 @@ def report_comment(request, id):
         # return render(request,'project/add_comment.html', context)
         return redirect(f'/project/comments/{project[0].project_id.project_id}')
     
+
+# --------------------------------- Add rate -----------------------------------------
 @login_required(login_url='/login')
 def add_rate(request, id):
     project = Project.objects.get(project_id=id)
