@@ -210,7 +210,7 @@ def report_project(request, id):
         return render(request, 'project/report_project.html', context)
 
     elif request.method == 'POST':
-        ProjectReports.objects.create(project_id_id=project.project_id, message='this project',
+        ProjectReports.objects.create(project_id_id=project.project_id, message='this project has been reported',
                                       user_id_id=request.session.get('id'))
 
     return redirect(f'/project/project_info/{project.project_id}')

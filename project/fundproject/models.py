@@ -48,7 +48,7 @@ class Comment(models.Model):
     comment_id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
-    comment = models.TextField(default=' ')
+    comment = models.TextField(default='')
 
 
 class CommentReports(models.Model):
@@ -59,7 +59,7 @@ class CommentReports(models.Model):
 
 class ProjectReports(models.Model):
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
-    message = models.CharField(max_length=20)
+    message = models.CharField(max_length=100)
     user_id = models.ForeignKey(Users, on_delete=models.CASCADE)
 
 
