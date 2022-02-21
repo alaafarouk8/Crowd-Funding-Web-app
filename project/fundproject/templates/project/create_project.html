@@ -14,26 +14,26 @@ Crowd Funding
         <div class="form row">
             <div class="form-group col-md-12">
                 <label for="projecttitleID" style="padding: 5px;">Project Title</label>
-                <input type="text" class="form-control" id="projecttitleID" placeholder="1234 Main St" name="project_title" style="padding: 10px; border-radius: 10px;" required>
+                <input type="text" class="form-control" id="projecttitleID" placeholder="Project title" name="Project Title" style="padding: 10px; border-radius: 10px;" required>
             </div>
         </div>
         <div class="form-group">
             <label for="projectdetailsID" style="padding: 5px;">Project details</label>
-            <textarea class="form-control" id="projectdetailsID" placeholder="1234 Main St"
+            <textarea class="form-control" id="projectdetailsID" placeholder="Project Details"
                 name="projectdetails" style="padding: 10px; border-radius: 10px;" required></textarea>
         </div>
         <div class="form row">
             <div class="form-group col-lg-4">
                 <label for="totaltargetID" style="padding: 5px;">Total Target</label>
-                <input type="text" class="form-control" id="totaltargetID" name="totaltarget" style="padding: 10px; border-radius: 10px;" required>
+                <input type="text" class="form-control" id="totaltargetID" name="totaltarget" placeholder="Total Target" style="padding: 10px; border-radius: 10px;" required>
             </div>
             <div class="form-group col-lg-4">
                 <label for="TagsID" style="padding: 5px;">Tags</label>
-                <input type="text" class="form-control" id="TagsID" name="tags" style="padding: 10px; border-radius: 10px;" required>
+                <input type="text" class="form-control" id="TagsID" placeholder="Tags. ex tag1,tag2,tag3" name="tags" style="padding: 10px; border-radius: 10px;" required>
             </div>
             <div class="form-group col-lg-4">
                 <label for="categoryID" style="padding: 5px;">Category</label>
-                <select id="categoryID" class="form-control" name="category" style="padding: 10px; border-radius: 10px;" required>
+                <select id="categoryID" class="form-control" name="category"  style="padding: 10px; border-radius: 10px;" required>
                     {%for cat in catg%}
                     <option value="{{cat.category_name}}">{{cat.category_name}}</option>
                     {%endfor%}
@@ -43,18 +43,18 @@ Crowd Funding
         <div class="form row">
             <div class="form-group col-md-6">
                 <label for="startdateID" style="padding: 5px;">Start Date</label>
-                <input type="date" class="form-control" id="startdateID" name="startdate" style="padding: 10px; border-radius: 10px;" required>
+                <input type="date" class="form-control" id="startdateID"  name="startdate" style="padding: 10px; border-radius: 10px;" required>
             </div>
             <div class="form-group col-md-6">
                 <label for="enddateID" style="padding: 5px;">End Date</label>
-                <input type="date" class="form-control" id="enddateID" name="enddate" style="padding: 10px; border-radius: 10px;" required>
+                <input type="date" class="form-control" id="enddateID" name="enddate"  style="padding: 10px; border-radius: 10px;" required>
             </div>
         </div>
 
         <div class="form row">
         <div class="form-group col-md-6">
             <label for="ProjectImagesID" style="padding: 5px;">Project Images</label>
-            <input type="file" class="form-control" id="ProjectImagesID" multiple name="projectimage[]"required>
+            <input type="file" class="form-control" id="ProjectImagesID"  multiple name="projectimage[]"required>
         </div>
         </div>
 
