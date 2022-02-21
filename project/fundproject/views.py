@@ -23,7 +23,7 @@ def create_project(request):
             context['catg'] = categories
             return render(request, 'project/create_project.html', context)
         elif request.method == 'POST':
-            project_title = request.POST['project_title']
+            project_title = request.POST.get('project_title')
             project_details = request.POST['projectdetails']
             total_target = request.POST['totaltarget']
             category = Categories.objects.get(category_name=request.POST['category'])
@@ -67,7 +67,7 @@ def list_project(request):
 
 # --------------------------------- HOME Page -----------------------------------------
 def home(request):
-    latestProjects = Project.objects.values('project_id').order_by('start_date')[0:5]
+    latestProjects = Project.objects.values('project_id').order_by('-start_date')[0:5]
     FeaturedProjects = Project.objects.values('project_id')[0:5]
     topratedProjects = Rate.objects.values('project_id').annotate(rate=Max('rate')).order_by('-rate')[0:5]
 
@@ -234,7 +234,7 @@ def report_comment(request, id):
         return redirect(f'/project/comments/{project[0].project_id.project_id}')
     
 
-# --------------------------------- Add rate -----------------------------------------
+# --------------------------------- Add -----------------------------------------
 @login_required(login_url='/login')
 def add_rate(request, id):
     project = Project.objects.get(project_id=id)
