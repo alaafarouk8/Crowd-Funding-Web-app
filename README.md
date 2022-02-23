@@ -1,24 +1,28 @@
 # Crowd-Funding-Web-app
-Crowdfunding is the practice of funding a project or venture by raising small amounts of money from a large number of people, typically via the Internet. Crowdfunding is a form of crowdsourcing and alternative finance. In 2015, over US$34 billion was raised worldwide by crowdfunding. (From Wikipedia​ ) The aim of the project​ : Create a web platform for starting fundraise projects in Egypt.
+Crowdfunding is the practice of funding a project or venture by raising small amounts of money from a large number of people, typically via the Internet. Crowdfunding is a form of crowdsourcing and alternative finance. In 2015, over US$34 billion was raised worldwide by crowdfunding. (From Wikipedia) The aim of the project : Create a web platform for starting fundraise projects in Egypt.
 
-# create database and user 
+# Tools
+Python - Django - PostgreSql - RestFul Api 
+
+# Authors 
+-[Ahmed Hassanein](https://github.com/a-hassanein/).
+-[Abd ElRahman Mohamed](https://github.com/abdelrahmanelsese1).
+-[Ahmed Ashraf](https://github.com/Ahmedxd199).
+-[Alaa Farouk Abd El Majied](https://github.com/alaafarouk8).
+-[Abrar Abd El Mohsen](https://github.com/abrar4799).
+-[Aasmmaa Alaa El Din Moahamed](https://github.com/3asma2)
+
+# API Links:
+projrcts: http://127.0.0.1:8000/fundapiprojectListView/
+<br>
+users: http://127.0.0.1:8000/usersusersListView/
+
+# To Run this Project
+- clone the Repo https://github.com/alaafarouk8/Crowd-Funding-Web-app
 - pip install django==3.2.10
 - pip3 install djangorestframework
 - pip install django-mathfilters
 - pip install psycopg2
-- sudo -i -u postgres
-- psql
-- create database fund
-- create user funduser with password '123'
-- alter user funduser with superuser;
-- grant all privileges on database fund to funduser;
-- \q
-- psql -h localhost -U funduser fund
-- psql -h localhost -U funduser fund
-- djangorestframework-3.13.1
-
-#API links:
-projrcts: http://127.0.0.1:8000/fundapiprojectListView/
-users: http://127.0.0.1:8000/usersusersListView/
-
+- create database with name fund and password 123
+- python manage.py runserver
 
